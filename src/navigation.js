@@ -5,6 +5,7 @@ export const headerData = {
     { text: 'About', href: '/#about' },
     { text: 'Projects', href: '/#projects' },
     { text: 'Experience', href: '/#experience' },
+    { text: 'Leadership', href: '/#leadership' },
     { text: 'Skills', href: '/#skills' },
     { text: 'Contact', href: '/#contact' },
   ],

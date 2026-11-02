@@ -24,10 +24,8 @@ const socials = [
 const groups = {
   experience: { heading: 'Experience', icon: 'tabler:briefcase', items: experience },
   education: { heading: 'Education', icon: 'tabler:school', items: education },
-  leadership: { heading: 'Leadership', icon: 'tabler:users-group', items: leadership },
 };
-// Two columns: experience on the left; education + leadership stacked on the right
-const timelineColumns = [[groups.experience], [groups.education, groups.leadership]]
+const timelineColumns = [[groups.experience], [groups.education]]
   .map((col) => col.filter((g) => g.items.length))
   .filter((col) => col.length);
 
@@ -106,6 +104,7 @@ const sectionTitle = 'text-3xl md:text-4xl font-bold tracking-tight font-heading
           projects.map((p) => (
             <article class="flex flex-col rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-md transition">
               <h3 class="text-xl font-semibold dark:text-white">{p.title}</h3>
+              {p.subtitle && <p class="mt-1 text-sm font-medium text-primary dark:text-blue-300">{p.subtitle}</p>}
               {p.date && <p class="text-sm text-muted dark:text-slate-500 mt-1">{p.date}</p>}
               <ul class="mt-3 space-y-2 text-muted dark:text-slate-400 flex-1 list-disc pl-5">
                 {p.points.map((pt) => (
@@ -168,8 +167,51 @@ const sectionTitle = 'text-3xl md:text-4xl font-bold tracking-tight font-heading
     )
   }
 
+  <!-- Leadership -->
+  {
+    leadership.length > 0 && (
+      <section id="leadership" class="scroll-mt-16 bg-blue-50/60 dark:bg-slate-900/40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+          <h2 class={sectionTitle}>Leadership</h2>
+          <div class="grid gap-6 md:grid-cols-2">
+            {leadership.map((o) => (
+              <article class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                <div class="flex items-start gap-3">
+                  <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-slate-800">
+                    <Icon name="tabler:users-group" class="w-5 h-5 text-primary" />
+                  </span>
+                  <div>
+                    <h3 class="text-xl font-semibold dark:text-white">{o.org}</h3>
+                    <p class="text-sm text-muted dark:text-slate-500">{o.dates}</p>
+                  </div>
+                </div>
+                {o.summary && <p class="mt-3 font-medium text-gray-800 dark:text-slate-200">{o.summary}</p>}
+                <ol class="mt-4 space-y-4 border-l-2 border-blue-200 dark:border-slate-700 pl-4">
+                  {o.roles.map((r) => (
+                    <li>
+                      <p class="font-semibold dark:text-white">
+                        {r.title} <span class="ml-1 text-sm font-normal text-muted dark:text-slate-500">· {r.dates}</span>
+                      </p>
+                      {r.points && (
+                        <ul class="mt-1 list-disc pl-5 space-y-1 text-muted dark:text-slate-400">
+                          {r.points.map((pt) => (
+                            <li>{pt}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <!-- Skills -->
-  <section id="skills" class="scroll-mt-16 bg-blue-50/60 dark:bg-slate-900/40">
+  <section id="skills" class="scroll-mt-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
       <h2 class={sectionTitle}>Skills</h2>
       <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
