@@ -1,33 +1,32 @@
 /**
- * ✏️  EDIT THIS FILE to personalise the site.
+ * ✏️  EDIT THIS FILE to update the site.
  *
- * Everything shown on the homepage comes from here. Anything marked TODO is a
- * placeholder — replace it with your own details, commit, and Vercel will
- * redeploy automatically.
+ * Everything shown on the homepage comes from here. Commit and push, and
+ * Vercel redeploys automatically.
  */
 
 export const profile = {
   name: 'Elizabeth Pardhe',
-  // TODO: one-line headline, e.g. "Computer Science student at X" or "Software engineer"
-  headline: 'Developer · Builder · Lifelong learner',
-  // TODO: 1–2 sentence intro shown under your name
-  intro: 'Welcome to my corner of the internet. I build things for the web and love learning along the way.',
-  // TODO: optional — set to your city, or '' to hide
+  headline: 'Data Science & Economics · ASU Barrett Honors College',
+  intro:
+    'I combine quantitative analysis, AI, research, and product thinking to turn ambiguous problems into practical solutions.',
+  // Optional — e.g. 'Tempe, AZ'; '' hides it
   location: '',
-  // TODO: put a résumé PDF in /public (e.g. public/resume.pdf) and set this to '/resume.pdf'; '' hides the button
+  // Put a résumé PDF at public/resume.pdf and set this to '/resume.pdf'; '' hides the button
   resumeUrl: '',
 };
 
-// TODO: a few short paragraphs about you
 export const about = [
-  "Hi, I'm Elizabeth! This is a placeholder bio — tell visitors who you are, what you're working on, and what you're excited about.",
-  'You might mention what got you into your field, the kinds of problems you like solving, and what you do when you are not at a keyboard.',
+  "I'm a senior at Arizona State University's Barrett, The Honors College, double majoring in Data Science and Economics. My interests sit at the intersection of technology, economics, research, and product thinking — especially where data and AI can be used to solve real business problems.",
+  "I've worked on projects ranging from market microstructure and economic forecasting to agentic AI systems and alternative-data research. I'm comfortable in Python, statistical modeling, and machine learning, but I'm usually most interested in the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful?",
+  "Outside of technical work, leadership and communication have been a big part of my college experience — from leadership roles in university organizations to building mentorship and alumni initiatives. I enjoy taking an ambiguous problem, researching it, developing a direction, and communicating the result clearly.",
+  "I'm looking for roles in data science, analytics, product, and research — where I can build and evaluate things myself while thinking strategically and owning problems from beginning to end.",
 ];
 
 export const links = {
   github: 'https://github.com/Elizabeth-Pardhe',
-  linkedin: '', // TODO: e.g. 'https://www.linkedin.com/in/your-handle'
-  email: '', // TODO: e.g. 'you@example.com' — leave '' to keep it off the public site
+  linkedin: '', // e.g. 'https://www.linkedin.com/in/your-handle'
+  email: '', // e.g. 'you@example.com' — leave '' to keep it off the public site
 };
 
 export interface Project {
@@ -37,54 +36,82 @@ export interface Project {
   href?: string; // live demo or repo
 }
 
-// TODO: replace with your real projects
 export const projects: Project[] = [
   {
-    title: 'Personal Portfolio Website',
-    description: 'This site! Built with Astro and Tailwind CSS, deployed on Vercel.',
-    tech: ['Astro', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-    href: 'https://github.com/Elizabeth-Pardhe/personal-portfolio-website',
+    title: 'Alternative-Data Research Engine — Applied Materials',
+    description:
+      'Longaeva AI Hack-a-Thon (advanced to Stage 2). Researched the fundamental drivers of Applied Materials, identified key operating KPIs, and tested whether externally observable alternative data could give earlier signals of operational change. Built a research engine with live SEC filings and market data, scenario testing, and source verification.',
+    tech: ['Python', 'SEC filings', 'Market data', 'Scenario testing', 'AI'],
   },
   {
-    title: 'Project Two (placeholder)',
-    description: 'A short description of what it does, the problem it solves, and what you learned.',
-    tech: ['Tech', 'Stack'],
+    title: 'Agentic AI Systems',
+    description: 'Designing AI agents that research, reason over data, and verify their sources to support real decisions.',
+    tech: ['Python', 'LLMs', 'APIs'],
   },
   {
-    title: 'Project Three (placeholder)',
-    description: 'A short description of what it does, the problem it solves, and what you learned.',
-    tech: ['Tech', 'Stack'],
+    title: 'Market Microstructure',
+    description: 'Quantitative analysis of how markets behave at the level of orders, trades, and liquidity.',
+    tech: ['Python', 'Statistical modeling'],
+  },
+  {
+    title: 'Economic Forecasting',
+    description: 'Building and evaluating statistical and machine-learning models to forecast economic indicators.',
+    tech: ['Python', 'Time series', 'Machine learning'],
   },
 ];
 
 export interface TimelineEntry {
   title: string;
   org: string;
-  dates: string;
+  dates?: string;
   description?: string;
 }
 
-// TODO: your jobs / internships / roles. Empty array hides the section.
+// Empty array hides the section.
 export const experience: TimelineEntry[] = [
   {
-    title: 'Role title (placeholder)',
-    org: 'Company or organisation',
-    dates: '20XX – Present',
-    description: 'What you worked on and the impact you had.',
+    title: 'Stage 2 Participant',
+    org: 'Longaeva AI Hack-a-Thon',
+    description:
+      'Built an alternative-data research engine on Applied Materials combining live SEC filings, market data, scenario testing, and source verification.',
+  },
+  {
+    title: 'Student Leader',
+    org: 'Arizona State University organizations',
+    description:
+      'Held leadership roles, helped build mentorship and alumni initiatives, organized events, and worked on multidisciplinary teams.',
   },
 ];
 
-// TODO: your schools / degrees. Empty array hides the section.
 export const education: TimelineEntry[] = [
   {
-    title: 'Degree or program (placeholder)',
-    org: 'School name',
-    dates: '20XX – 20XX',
+    title: 'Data Science & Economics (double major)',
+    org: 'Arizona State University — Barrett, The Honors College',
+    dates: 'Senior',
   },
 ];
 
-// TODO: your skills, grouped however you like
 export const skills: Record<string, string[]> = {
-  Languages: ['JavaScript', 'TypeScript', 'HTML', 'CSS'],
-  'Frameworks & tools': ['Astro', 'Tailwind CSS', 'Git', 'Vercel'],
+  Technical: [
+    'Python',
+    'Statistical modeling',
+    'Machine learning',
+    'Data pipelines',
+    'APIs',
+    'Interactive applications',
+  ],
+  'Domains & interests': [
+    'Economic forecasting',
+    'Market microstructure',
+    'Agentic AI',
+    'Alternative data',
+    'Product thinking',
+  ],
+  'Leadership & communication': [
+    'Research & synthesis',
+    'Clear communication',
+    'Mentorship programs',
+    'Event organizing',
+    'Cross-functional teams',
+  ],
 };

@@ -10,7 +10,7 @@ metadata:
   title:
     default: Elizabeth Pardhe
     template: '%s — Elizabeth Pardhe'
-  description: 'Personal website and portfolio of Elizabeth Pardhe.'
+  description: 'Elizabeth Pardhe — Data Science & Economics at ASU Barrett Honors College. Quantitative analysis, AI, research, and product thinking.'
   robots:
     index: true
     follow: true
