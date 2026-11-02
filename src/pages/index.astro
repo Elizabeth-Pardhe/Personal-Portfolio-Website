@@ -18,7 +18,7 @@ import {
 } from '~/data/profile';
 
 const metadata = {
-  title: `${profile.name} — ${profile.headline}`,
+  title: `${profile.name} | ${profile.headline}`,
   ignoreTitleTemplate: true,
   description: profile.intro,
 };
@@ -49,7 +49,7 @@ const contacts = [
     <!-- Header -->
     <header class="hdr">
       <div class="wrap hdr-in">
-        <a href="#top" class="brand" aria-label={`${profile.name} — home`}>
+        <a href="#top" class="brand" aria-label={`${profile.name}, home`}>
           <BarE size={30} />
           <span>{profile.name}</span>
         </a>
@@ -82,7 +82,7 @@ const contacts = [
       <!-- Hero -->
       <section class="hero wrap">
         <div class="hero-text">
-          <p class="kicker">Data Science &amp; Economics — ASU Barrett</p>
+          <p class="kicker">Data Science &amp; Economics · ASU Barrett</p>
           <h1>
             {first} <em>{last}</em>
           </h1>
@@ -153,6 +153,7 @@ const contacts = [
                     )}
                   </h3>
                   {p.subtitle && <p class="gold-sub">{p.subtitle}</p>}
+                  <p class="blurb">{p.blurb}</p>
                   <ul class="points">
                     {p.points.map((pt) => (
                       <li>{pt}</li>
@@ -274,10 +275,10 @@ const contacts = [
 
       <!-- Contact -->
       <section id="contact" class="wrap contact">
-        <p class="kicker">vi. — Contact</p>
+        <p class="kicker">vi. Contact</p>
         <h2>Let's <em>talk.</em></h2>
         <p class="lede">
-          I'm open to data science, analytics, product, and research opportunities — I'd love to hear from you.
+          I'm open to data science, analytics, product and research opportunities. I'd love to hear from you.
         </p>
         <div class="contact-links">
           {
@@ -328,7 +329,7 @@ const contacts = [
       background-color 0.3s,
       color 0.3s;
   }
-  /* Dark theme — forest black & gold */
+  /* Dark theme: forest black & gold */
   :global(.dark) .site {
     --bg: #0f1d1a;
     --ink: #e9e4d8;
@@ -705,6 +706,14 @@ const contacts = [
   }
   .work-body h3 a:hover {
     color: var(--pink);
+  }
+  .blurb {
+    margin-top: 14px;
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 36em;
   }
   .work-meta .date {
     display: block;

@@ -1,8 +1,8 @@
 ---
 /**
  * The "E" monogram drawn as a horizontal bar chart.
- * variant="mark"   → compact logo
- * variant="figure" → large hero figure with axis, gridlines and labels (bars animate in)
+ * variant="mark"   to compact logo
+ * variant="figure" to large hero figure with axis, gridlines and labels (bars animate in)
  */
 export interface Props {
   variant?: 'mark' | 'figure';
@@ -45,7 +45,7 @@ const { variant = 'mark', size = 28, class: className = '' } = Astro.props;
       </svg>
       <figcaption>
         <span>
-          <em>fig. i</em> — E, as a bar chart
+          <em>fig. i</em>: E, as a bar chart
         </span>
         <span>n = 1</span>
       </figcaption>

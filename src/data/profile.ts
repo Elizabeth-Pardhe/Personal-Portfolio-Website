@@ -10,7 +10,7 @@ export const profile = {
   headline: 'Data Science & Economics · ASU Barrett Honors College',
   intro:
     'I combine quantitative analysis, AI, research, and product thinking to turn ambiguous problems into practical solutions.',
-  // Optional — '' hides it
+  // Optional; '' hides it
   location: 'Phoenix, AZ',
   // Put a résumé PDF at public/resume.pdf and set this to '/resume.pdf'; '' hides the button
   resumeUrl: '',
@@ -19,10 +19,10 @@ export const profile = {
 };
 
 export const about = [
-  "I'm a senior at Arizona State University's Barrett, The Honors College, studying Data Science (with a focus in mathematics) and Economics, and continuing into an MS in Data Science. My interests sit at the intersection of technology, economics, research, and product thinking — especially where data and AI can be used to solve real business problems.",
-  "I've worked on projects ranging from market microstructure and medical-imaging deep learning to multimodal NLP research and evidence-weighting research engines built on SEC filings. I'm comfortable in Python, statistical modeling, and machine learning, but I'm usually most interested in the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful?",
-  "Outside of technical work, leadership and communication have been a big part of my college experience — co-leading ASU's Software Developers Association, serving as president of Devil Data Science, founding SoDA's mentorship program, and helping host ASU's first Women in Tech Conference. I enjoy taking an ambiguous problem, researching it, developing a direction, and communicating the result clearly.",
-  "I'm looking for roles in data science, analytics, product, and research — where I can build and evaluate things myself while thinking strategically and owning problems from beginning to end.",
+  "I'm a senior at Arizona State University's Barrett, The Honors College, studying Data Science (with a focus in mathematics) and Economics, and I'm continuing into a master's in Data Science. I'm most interested in where technology, economics, research and product thinking meet, especially when data and AI can solve real business problems.",
+  "My projects range from studying how trading activity moves Bitcoin's price, to training AI models to read chest X-rays, to building a tool that scans company filings and news for early signs of change. I'm comfortable with Python, statistics and machine learning, but the part I enjoy most is the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful?",
+  "Leadership has been a big part of college for me. I co-lead ASU's Software Developers Association, serve as president of Devil Data Science, started SoDA's mentorship program, and helped host ASU's first Women in Tech Conference. I like taking a messy problem, researching it, choosing a direction and explaining the result clearly.",
+  "I'm looking for roles in data science, analytics, product and research where I can build and test things myself, think strategically, and own problems from start to finish.",
 ];
 
 export const links = {
@@ -35,6 +35,7 @@ export interface Project {
   title: string;
   subtitle?: string;
   date?: string;
+  blurb: string; // one plain-English sentence anyone can understand
   points: string[];
   tech: string[];
   href?: string; // live demo or repo
@@ -42,41 +43,49 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Consensus Gap: Alt-Data Research Engine',
-    subtitle: 'Longaeva AI Hack-a-Thon · Applied Materials · Advanced to Stage 2',
+    title: 'Consensus Gap',
+    subtitle: 'Longaeva AI Hack-a-Thon · Advanced to Stage 2',
+    blurb:
+      "A research tool that reads a company's public filings, economic data and news coverage to spot early signs that its business is changing, before the next earnings report confirms it.",
     points: [
-      'Researched the fundamental drivers of Applied Materials, identified key operating KPIs, and tested whether externally observable alternative data could signal operational changes earlier.',
-      'Built a stdlib-only Python engine that weights public evidence (SEC, XBRL, FRED, GDELT) claim by claim using Bayesian log-odds, with LLM-extracted claims gated by verbatim-quote validation and code-set weights — covered by 185 offline unit tests.',
-      'Backtested over 27 earnings dates without look-ahead, reporting an 88% hit rate against a 93% always-long base rate. Deployed with JSON snapshots for ~2-second loads.',
+      'Focused on Applied Materials, which makes the machines used to manufacture computer chips. I identified the numbers that best show how its business is doing, then tested whether alternative data (public information from outside the company, such as economic indicators and news) could show changes in those numbers sooner.',
+      'The tool uses AI to pull specific claims out of SEC filings, government economic data and global news, and only keeps a claim if its exact quote appears in the original source.',
+      "It weighs each piece of evidence and combines it into one overall read on the company, with 185 automated tests checking the logic. I tested it on 27 past earnings reports using only the information available at the time.",
     ],
-    tech: ['Python', 'SEC EDGAR / XBRL', 'FRED', 'GDELT', 'LLM extraction', 'Bayesian inference', 'Vercel'],
+    tech: ['Python', 'SEC filings', 'Economic data (FRED)', 'News data (GDELT)', 'LLMs', 'Bayesian statistics'],
   },
   {
-    title: 'Market Microstructure: Order Flow & Price Formation',
+    title: "How Buying Pressure Moves Bitcoin's Price",
+    subtitle: 'Market microstructure study',
     date: 'Spring 2026',
+    blurb:
+      "A study of whether the balance of buyers and sellers in Bitcoin over short windows explains where its price goes, and whether it can predict the next move.",
     points: [
-      'Built an analytics pipeline on 9,000+ high-frequency Bitcoin observations, engineering directional order-flow features and cleaning 75%+ inactive intervals into a statistically valid dataset for return modeling.',
-      'Quantified how trading pressure drives price formation with regression and decile analysis — order-flow signals explain ~4.8% of short-term return variation, with limited forward predictive power in a liquid market.',
+      'Collected 9,000+ short-interval Bitcoin trading records and removed the long stretches with no trading, so the analysis only counted real activity.',
+      'Found that buying and selling pressure explains about 5% of short-term price movement but does little to predict the next move, which is what you would expect in a market this heavily traded.',
     ],
-    tech: ['pandas', 'NumPy', 'SciPy', 'Matplotlib', 'yfinance'],
+    tech: ['Python', 'pandas', 'Statistics', 'Regression'],
   },
   {
     title: 'Quantumvest Fintech Proposal',
     subtitle: '1st Place · AKPsi × Investment and Finance Association AI Case Competition',
+    blurb:
+      "Won first place by pitching an interactive financial analysis web app designed around the needs of an investment advisory firm's clients.",
     points: [
-      'Presented a fintech proposal addressing client needs for Quantumvest, a leading RIA firm, delivered through an interactive financial-analysis web app.',
+      'Researched the client needs of Quantumvest, a leading investment advisory firm, and presented the solution through a working web app.',
     ],
     tech: ['Web app', 'Financial analysis', 'AI'],
   },
   {
-    title: 'Airman App-Building Course — Luke Air Force Base',
+    title: 'Coding Course for Airmen at Luke Air Force Base',
     subtitle: 'PAF 215 Project · Developer',
     date: 'Jan 2024 – May 2024',
+    blurb: 'A beginner coding course that teaches airmen to build their own apps and dashboards for the base.',
     points: [
-      'Worked with airmen and 3 Air Force officials to create a course teaching the basics of Java, Python, and HTML so airmen could build apps and dashboards for the base.',
-      'Researched the problem with industry professionals and professors from varied technical backgrounds, then designed a working task manager and dashboard.',
+      'Worked with airmen and 3 Air Force officials to design lessons on Java, Python and HTML.',
+      'Talked with industry professionals and professors to understand the problem, then built a working task manager and dashboard as examples.',
     ],
-    tech: ['Java', 'Python', 'HTML', 'Curriculum design', 'Dashboards'],
+    tech: ['Java', 'Python', 'HTML', 'Teaching'],
   },
 ];
 
@@ -94,42 +103,42 @@ export const experience: TimelineEntry[] = [
     org: 'ASU Learning Engineering Institute',
     dates: 'Fall 2026',
     description:
-      'Built a seeded, reproducible synthetic learner dataset for an AI reading companion (268 behavioral events, 64 pipeline trace rows, versioned intervention policies) in a schema-constrained SQLite store, plus a tested telemetry pipeline and schema-checking ingestion writer.',
+      'Built a realistic practice dataset of how students use an AI reading assistant (268 simulated reading events across 4 readings), plus the system that records and checks that data, so the team can test the assistant reliably.',
   },
   {
-    title: 'Undergraduate ML Student Researcher — C-SPAN Research',
+    title: 'Machine Learning Researcher, C-SPAN Project',
     org: 'The Data Mine, Purdue University',
     dates: 'Aug 2025 – Apr 2026',
     description:
-      'Researched multimodal sentiment analysis on congressional speech, evaluating BERT, wav2vec 2.0, and fusion techniques for detecting rhetorical polarization across text, audio, and video.',
+      'Studied how combining what members of Congress say, how they sound and how they look on video helps AI detect polarizing speech, using language and speech models such as BERT and wav2vec 2.0.',
   },
   {
     title: 'Undergraduate Researcher',
-    org: 'Barrett College Fellows — Imaging Informatics (JLiang Lab)',
+    org: 'Barrett College Fellows, Imaging Informatics (JLiang Lab)',
     dates: 'Sept 2025 – Dec 2025',
     description:
-      'Built and compared PyTorch deep-learning pipelines (ConvNeXt, DINO-based models, U-Net, U-Net++) for chest X-ray analysis on CheXpert and Pneumothorax, and diagnosed training-instability issues to improve preprocessing and architecture selection.',
+      'Trained and compared AI models that read chest X-rays to find problems such as a collapsed lung, and worked out why some models struggled to train so the process could be improved.',
   },
   {
     title: 'Data & Finance Intern',
     org: 'GreenLight Solutions (sustainability nonprofit)',
     dates: 'Apr 2025 – Aug 2025',
     description:
-      'Turned 5 years of financial and operational data into dashboards and impact reports, with fundraising recommendations to improve donor retention. Built Excel processes that standardized monthly reporting (cutting manual processing time 40%) and supported sponsorship proposals with quantitative analysis.',
+      'Turned 5 years of financial data into dashboards and impact reports, recommended ways to keep donors giving, and built Excel tools that cut monthly reporting time by 40%.',
   },
   {
-    title: 'Undergraduate ML Student Researcher — TranslationalHDPM',
+    title: "Machine Learning Researcher, Alzheimer's Project",
     org: 'The Data Mine, Purdue University · with SuperFluidDX',
     dates: 'Aug 2024 – Apr 2025',
     description:
-      "Partnered with SuperFluidDX, a molecular diagnostics company, on ML models analyzing RNA-based insights for Alzheimer's patients. Estimated measurement uncertainty via simulations of high-dimensional RNA-Seq in Python, R, and Excel; Spearman correlation and PCA preprocessing contributed to a 5% model performance gain.",
+      "Worked with SuperFluidDX, a diagnostics company, on models that use genetic (RNA) data to study Alzheimer's patients. Cleaned and combined large genetic datasets and simplified them in ways that improved model performance by 5%.",
   },
   {
     title: 'Research Assistant',
-    org: 'Science and Engineering Experience (SCENE) · ASU',
+    org: 'Science and Engineering Experience (SCENE), ASU',
     dates: 'Nov 2022 – Apr 2023',
     description:
-      'Researched with Prof. Houlong Zhuang how to reduce hydrogen embrittlement in metals; presented at the Arizona Science and Engineering Fair.',
+      'Researched with Prof. Houlong Zhuang how hydrogen makes metals brittle and how to prevent it, and presented the work at the Arizona Science and Engineering Fair.',
   },
 ];
 
@@ -151,7 +160,7 @@ export const leadership: LeadershipOrg[] = [
   {
     org: 'Software Developers Association (SoDA) at ASU',
     dates: 'Nov 2023 – Present',
-    summary: 'Grew club engagement 75% through 10+ professional-development events for 3,000+ members.',
+    summary: 'Grew club engagement 75% through 10+ career events for 3,000+ members.',
     roles: [
       { title: 'Co-President', dates: 'May 2026 – Present' },
       {
@@ -202,7 +211,7 @@ export const leadership: LeadershipOrg[] = [
     ],
   },
   {
-    org: 'Alpha Kappa Psi — Iota Xi Chapter',
+    org: 'Alpha Kappa Psi, Iota Xi Chapter',
     dates: 'Apr 2024 – Present',
     summary: '1st place, AKPsi × Investment and Finance Association AI Case Competition.',
     roles: [
@@ -223,7 +232,7 @@ export const leadership: LeadershipOrg[] = [
   {
     org: 'ASU Next Generation Service Corps',
     dates: 'Sep 2023 – Present',
-    summary: 'Planned 23 professional-development events for 500+ students and 30 community partners.',
+    summary: 'Planned 23 career events for 500+ students and 30 community partners.',
     roles: [
       {
         title: 'Mission Team Lead, MT 24: Energy & Climate Sustainability',
@@ -258,7 +267,7 @@ export const education: TimelineEntry[] = [
   },
   {
     title: 'BS Data Science (Mathematics focus) & BS Economics',
-    org: 'Arizona State University — Barrett, The Honors College',
+    org: 'Arizona State University, Barrett The Honors College',
     dates: 'Expected May 2027',
     description: "Dean's List · Minor in Business · Cross-Sector Leadership Certificate",
   },
@@ -272,8 +281,8 @@ export const skills: Record<string, string[]> = {
 
 // Headline numbers shown under the hero. Empty array hides the strip.
 export const stats: { value: string; label: string }[] = [
-  { value: '88%', label: 'hit rate · Consensus Gap backtest' },
-  { value: '185', label: 'offline unit tests' },
-  { value: '9,000+', label: 'BTC observations modeled' },
-  { value: '3,000+', label: 'SoDA members served' },
+  { value: '1st', label: 'place, AI case competition' },
+  { value: '185', label: 'automated tests in Consensus Gap' },
+  { value: '9,000+', label: 'Bitcoin trading records analyzed' },
+  { value: '3,000+', label: 'SoDA members reached' },
 ];
