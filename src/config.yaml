@@ -10,7 +10,7 @@ metadata:
   title:
     default: Elizabeth Pardhe
     template: '%s | Elizabeth Pardhe'
-  description: 'Elizabeth Pardhe: Data Science & Economics at ASU Barrett Honors College. Quantitative analysis, AI, research, and product thinking.'
+  description: 'Elizabeth Pardhe: Data Science & Economics student at ASU Barrett. Using data, economics and AI to understand businesses and markets. Open to Summer 2027 internships.'
   robots:
     index: true
     follow: true
