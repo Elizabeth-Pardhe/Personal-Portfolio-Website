@@ -35,7 +35,7 @@ export const shortVersion = {
     },
     {
       title: 'Build things people use',
-      text: "I like turning analysis into something people can pick up and use, like the Excel reporting tools I built for a nonprofit or the app concept that won our case competition.",
+      text: "I like turning analysis into something people can pick up and use, like the testing setup I built at the Learning Engineering Institute so my team can check how an AI reading assistant behaves.",
     },
     {
       title: 'Bring people with me',
@@ -157,7 +157,7 @@ export const experience: TimelineEntry[] = [
     org: 'GreenLight Solutions (sustainability nonprofit)',
     dates: 'Apr 2025 – Aug 2025',
     description:
-      'Turned 5 years of financial data into impact reports, recommended ways to keep donors giving, and built Excel tools that cut monthly reporting time by 40%.',
+      'Turned 5 years of financial data into impact reports, recommended ways to keep donors giving, and automated monthly Excel reporting, cutting the time it took by 40%.',
   },
   {
     title: "Machine Learning Researcher, Alzheimer's Project",
