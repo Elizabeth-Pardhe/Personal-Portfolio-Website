@@ -15,7 +15,7 @@ export const profile = {
   // Put a résumé PDF at public/resume.pdf and set this to '/resume.pdf'; '' hides the button
   resumeUrl: '',
   // Put a square photo at public/photo.jpg and set this to '/photo.jpg'; '' shows initials instead
-  photoUrl: '',
+  photoUrl: '/photo.jpg',
 };
 
 export const about = [
