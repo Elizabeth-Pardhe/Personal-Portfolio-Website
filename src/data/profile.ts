@@ -116,7 +116,7 @@ export const projects: Project[] = [
     blurb: 'A beginner coding course that teaches airmen to build their own apps and dashboards for the base.',
     points: [
       'Worked with airmen and 3 Air Force officials to design lessons on Java, Python and HTML.',
-      "Talked with industry professionals and professors to understand the problem, then designed a task manager and a dashboard and presented how they'd work to the Air Force officials.",
+      'Talked with industry professionals and professors to understand the problem, then designed a task manager and a dashboard and presented them to the Air Force officials.',
     ],
     tech: ['Java', 'Python', 'HTML', 'Teaching', 'UI design'],
   },
