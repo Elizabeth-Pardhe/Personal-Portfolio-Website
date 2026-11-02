@@ -35,7 +35,7 @@ export const shortVersion = {
     },
     {
       title: 'Build things people use',
-      text: "I like turning analysis into something people can pick up and use, like the data pipeline I built for Archie, an AI reading companion my team at the Learning Engineering Institute is using in its research.",
+      text: "I like turning analysis into something people can pick up and use, like the data pipeline I built for ARCHIE, an AI reading companion my team at the Learning Engineering Institute is using in its research.",
     },
     {
       title: 'Bring people with me',
@@ -74,18 +74,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Archie',
+    title: 'ARCHIE',
     area: 'data',
     subtitle: 'AI reading companion · ASU Learning Engineering Institute',
     date: 'Fall 2026',
     blurb:
-      "A research tool that studies whether AI help strengthens a student's thinking or replaces it. It pays attention to how someone reads and can offer a short prompt, and I built the part that captures and stores all of that reading activity.",
+      "A research project at ASU's Learning Engineering Institute exploring how AI can support students while they read. I built the data side of the system.",
     points: [
-      'Every move a reader makes, from a highlight to a long pause, gets saved with a timestamp and the exact paragraph it happened in.',
-      "Activity goes into a database for the research team, while each student's highlights and notes are saved as files they own and can open and edit themselves. I also built a developer view that traces any highlight from the database to its file.",
-      'Soft highlights are tracked without ever recording what the reader selected, and tracking only starts once someone shows that habit.',
-      'Before any real students used it, I tested the whole flow in a live browser with a synthetic dataset of 268 reading events, and I found and fixed two bugs that were overcounting reading time.',
-      "I merged a teammate's reading interface into the project, wrote the team's data guide, and presented the work at lab meetings.",
+      'Designed how reading activity gets captured and stored, with student privacy in mind and with students keeping ownership of their own notes.',
+      'Tested the whole system with synthetic data before any real students used it, and tracked down and fixed bugs along the way.',
     ],
     tech: ['Python', 'SQLite', 'TypeScript', 'React', 'Synthetic data', 'Browser testing'],
     note: 'Built with AI-assisted development',
@@ -160,7 +157,7 @@ export const experience: TimelineEntry[] = [
     org: 'ASU Learning Engineering Institute',
     dates: 'Fall 2026',
     description:
-      "Built the data layer for Archie, a research project studying whether AI support strengthens a student's thinking or replaces it. My work covers how reading activity gets captured, stored and tested.",
+      "Built the data side of ARCHIE, a research project at the Learning Engineering Institute exploring how AI can support students while they read.",
   },
   {
     title: 'Machine Learning Researcher, C-SPAN Project',
@@ -338,7 +335,7 @@ export const chapters = {
   build: {
     question: 'What do you build?',
     answer:
-      "Most of my work starts with a question that doesn't have an obvious answer. Right now that's Archie at ASU's Learning Engineering Institute, and before that I spent a few years on research that ranged from chest X-rays to Alzheimer's genetics.",
+      "Most of my work starts with a question that doesn't have an obvious answer. Right now that's ARCHIE at ASU's Learning Engineering Institute, and before that I spent a few years on research that ranged from chest X-rays to Alzheimer's genetics.",
   },
   markets: {
     question: 'Why economics?',
