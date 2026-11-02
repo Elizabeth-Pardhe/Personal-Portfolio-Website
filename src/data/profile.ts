@@ -11,9 +11,9 @@ export const profile = {
   intro:
     "I use data, economics and AI to understand what's really happening inside businesses and markets, then turn what I find into tools and decisions people can use.",
   // Shown as a small badge in the hero; '' hides it
-  status: 'Open to Summer 2027 internships',
+  status: '',
   // "Currently" line in the hero
-  now: ['AI Intern, ASU Learning Engineering Institute', 'Co-President, SoDA', 'President, Devil Data Science'],
+  now: ['AI Intern, ASU Learning Engineering Institute', 'Co-President, Software Developers Association'],
   // Optional; '' hides it
   location: 'Phoenix, AZ',
   // Put a résumé PDF at public/resume.pdf and set this to '/resume.pdf'; '' hides the button
@@ -25,7 +25,7 @@ export const profile = {
 export const about = [
   "I'm a senior at Arizona State University's Barrett, The Honors College, studying Data Science (with a focus in mathematics) and Economics, and I'm continuing into a master's in Data Science. I'm most interested in where technology, economics and research meet, especially when data and AI can help solve a real business problem.",
   "My work so far ranges from training AI models to read chest X-rays, to studying how trading activity moves Bitcoin's price, to building a tool that scans company filings and news for early signs of change. I'm comfortable with Python, statistics and machine learning, and the part I enjoy most is the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful?",
-  "Leadership has been just as big a part of college for me. I co-lead ASU's Software Developers Association, serve as president of Devil Data Science, started SoDA's mentorship program, and helped host ASU's first Women in Tech Conference.",
+  "Leadership has been just as big a part of college for me. I co-lead ASU's Software Developers Association, where I started the club's mentorship program and helped host ASU's first Women in Tech Conference.",
 ];
 
 // A short personal note shown in the About section
@@ -221,24 +221,6 @@ export const leadership: LeadershipOrg[] = [
         title: 'Industry Officer',
         dates: 'Nov 2023 – Apr 2024',
         points: ['Reached out to 10+ companies for club sponsorship.'],
-      },
-    ],
-  },
-  {
-    org: 'Devil Data Science',
-    dates: 'Jan 2024 – Present',
-    summary: 'Went from communications director to president, running workshops that connect students with recruiters and hands-on technical skills.',
-    roles: [
-      { title: 'President', dates: 'May 2026 – Present' },
-      {
-        title: 'Secretary',
-        dates: 'Apr 2024 – Apr 2026',
-        points: ['Organized workshops and meetings connecting students with recruiters and technical skills beyond class projects.'],
-      },
-      {
-        title: 'Director of Communications',
-        dates: 'Jan 2024 – Apr 2024',
-        points: ['Designed event flyers, moderated online events, and led outreach at university events.'],
       },
     ],
   },
