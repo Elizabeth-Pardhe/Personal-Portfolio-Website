@@ -8,8 +8,7 @@
 export const profile = {
   name: 'Elizabeth Pardhe',
   headline: 'Data Science & Economics · ASU Barrett Honors College',
-  intro:
-    'I use data, economics and AI to turn messy, real-world information into clear signals people can trust, from hospital X-rays to company earnings.',
+  intro: "I use data and economics to work through problems that don't have obvious answers, and then help people act on what we find.",
   // Shown as a small badge in the hero; '' hides it
   status: '',
   // "Currently" line in the hero
@@ -24,37 +23,35 @@ export const profile = {
 
 // "The short version": one idea that ties the work together, then how I work, each backed by real examples
 export const shortVersion = {
-  lead: "I study Data Science (with a math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next. Whether the subject is health, politics, education or finance, my work comes back to one idea: turning messy, real-world information into signals people can trust and act on.",
+  lead: "I study Data Science (with a math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next. I like starting with a question that doesn't have an obvious answer and figuring out what the data can tell us. My projects have ranged from reading chest X-rays to tracking Bitcoin prices, but they all come down to digging into a problem until something useful shows up.",
   items: [
     {
       title: 'Start with the question',
-      text: "Whether it is a chest X-ray, a speech in Congress or a company's earnings, I begin by asking what we are really trying to learn and why it matters.",
+      text: "Before I touch a model, I want to know what we're trying to learn and why anyone cares. It's usually the hardest part, but it's the part I enjoy most!",
     },
     {
       title: 'Separate signal from noise',
-      text: 'My research has dealt with medical images, political speech and genetic data, and my finance projects pull from filings, news and trading records. In each one the hard part is proving which patterns are real. That is why Consensus Gap only keeps a claim if its exact quote appears in the source.',
+      text: "Messy data can tell you almost anything if you're not careful. I care about checking that a pattern is real before I lean on it, which is why Consensus Gap only keeps a claim if the exact quote shows up in the original source.",
     },
     {
       title: 'Build things people use',
-      text: 'A finding only matters if it helps someone decide something, so I turn analysis into tools: a research engine for investors, dashboards for a nonprofit, and a money-management app concept that won first place.',
+      text: "I like turning analysis into something people can pick up and use, like the testing setup I built at the Learning Engineering Institute so my team can check how an AI reading assistant behaves.",
     },
     {
       title: 'Bring people with me',
-      text: "As Co-President of ASU's Software Developers Association, I started the mentorship program and co-planned ASU's first Women in Tech Conference to help more students find their place in tech.",
+      text: "As Co-President of ASU's Software Developers Association, I started our mentorship program and the Women in Tech Conference at ASU. I like building the structures that help good ideas, and the people behind them, grow.",
     },
     {
       title: 'Keep making things',
-      text: 'Outside of work I paint and take photos, which I share at',
+      text: "When I'm not working with data, I'm usually painting or out taking photos. I post my favorite shots on",
       linkLabel: '@elizabeths_studio',
       linkUrl: 'https://www.instagram.com/elizabeths_studio/',
     },
   ] as { title: string; text: string; linkLabel?: string; linkUrl?: string }[],
 };
 
-// Closing paragraphs after "The short version"
-export const about = [
-  'I like taking something ambiguous, researching it until a direction becomes clear, and then explaining what I found in a way anyone can follow. That is why my work keeps landing between data, economics and product: I want to understand what is happening, back it up with evidence, and turn it into something someone can use.',
-];
+// Optional closing paragraphs after "The short version" (empty hides them)
+export const about: string[] = [];
 
 export const links = {
   github: 'https://github.com/Elizabeth-Pardhe',
@@ -96,7 +93,7 @@ export const projects: Project[] = [
       "A study of whether the balance of buyers and sellers in Bitcoin over short windows explains where its price goes, and whether it can predict the next move.",
     points: [
       'Collected 9,000+ short-interval Bitcoin trading records and removed the long stretches with no trading, so the analysis only counted real activity.',
-      'Found that buying and selling pressure explains about 5% of short-term price movement but does little to predict the next move, which is what you would expect in a market this heavily traded.',
+      "Found that buying and selling pressure explains about 5% of short-term price movement but does little to predict the next move, which is what you'd expect in a market this heavily traded.",
     ],
     tech: ['Python', 'pandas', 'Statistics', 'Regression'],
   },
@@ -119,9 +116,9 @@ export const projects: Project[] = [
     blurb: 'A beginner coding course that teaches airmen to build their own apps and dashboards for the base.',
     points: [
       'Worked with airmen and 3 Air Force officials to design lessons on Java, Python and HTML.',
-      'Talked with industry professionals and professors to understand the problem, then built a working task manager and dashboard as examples.',
+      'Talked with industry professionals and professors to understand the problem, then designed a task manager and a dashboard and presented them to the Air Force officials.',
     ],
-    tech: ['Java', 'Python', 'HTML', 'Teaching'],
+    tech: ['Java', 'Python', 'HTML', 'Teaching', 'UI design'],
   },
 ];
 
@@ -160,7 +157,7 @@ export const experience: TimelineEntry[] = [
     org: 'GreenLight Solutions (sustainability nonprofit)',
     dates: 'Apr 2025 – Aug 2025',
     description:
-      'Turned 5 years of financial data into dashboards and impact reports, recommended ways to keep donors giving, and built Excel tools that cut monthly reporting time by 40%.',
+      'Turned 5 years of financial data into impact reports, recommended ways to keep donors giving, and automated monthly Excel reporting, cutting the time it took by 40%.',
   },
   {
     title: "Machine Learning Researcher, Alzheimer's Project",
@@ -196,7 +193,7 @@ export const leadership: LeadershipOrg[] = [
   {
     org: 'Software Developers Association (SoDA) at ASU',
     dates: 'Nov 2023 – Present',
-    summary: "Started the club's mentorship program, co-planned ASU's first Women in Tech Conference, and grew engagement 75% across 3,000+ members.",
+    summary: "Started the club's mentorship program and grew engagement 75% across 3,000+ members.",
     roles: [
       { title: 'Co-President', dates: 'May 2026 – Present' },
       {
@@ -204,7 +201,7 @@ export const leadership: LeadershipOrg[] = [
         dates: 'Aug 2025 – Apr 2026',
         points: [
           "As Mentorship Program Director, welcomed the largest cohort in the club's history.",
-          "Planned and hosted ASU's first Women in Tech Conference with Women in Computer Science, Women in Data Science and Statistics, AI Society, Google Developer Student Club, and more.",
+          'Founded the Women in Tech Conference at ASU with partner clubs across campus and hosted it two years in a row.',
           'Hosted the Fall and Spring Alumni Banquets for 50+ alumni, club representatives, and industry sponsors.',
         ],
       },
