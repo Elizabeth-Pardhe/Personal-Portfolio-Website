@@ -68,6 +68,16 @@ export const projects: Project[] = [
     ],
     tech: ['Web app', 'Financial analysis', 'AI'],
   },
+  {
+    title: 'Airman App-Building Course — Luke Air Force Base',
+    subtitle: 'PAF 215 Project · Developer',
+    date: 'Jan 2024 – May 2024',
+    points: [
+      'Worked with airmen and 3 Air Force officials to create a course teaching the basics of Java, Python, and HTML so airmen could build apps and dashboards for the base.',
+      'Researched the problem with industry professionals and professors from varied technical backgrounds, then designed a working task manager and dashboard.',
+    ],
+    tech: ['Java', 'Python', 'HTML', 'Curriculum design', 'Dashboards'],
+  },
 ];
 
 export interface TimelineEntry {
@@ -113,13 +123,6 @@ export const experience: TimelineEntry[] = [
     dates: 'Aug 2024 – Apr 2025',
     description:
       "Partnered with SuperFluidDX, a molecular diagnostics company, on ML models analyzing RNA-based insights for Alzheimer's patients. Estimated measurement uncertainty via simulations of high-dimensional RNA-Seq in Python, R, and Excel; Spearman correlation and PCA preprocessing contributed to a 5% model performance gain.",
-  },
-  {
-    title: 'Developer (PAF 215 Project)',
-    org: 'Luke Air Force Base',
-    dates: 'Jan 2024 – May 2024',
-    description:
-      'Worked with airmen and 3 Air Force officials to build a course teaching Java, Python, and HTML so airmen could create apps and dashboards for the base; researched the problem with industry professionals and professors and designed a working task manager and dashboard.',
   },
   {
     title: 'Research Assistant',
@@ -257,7 +260,7 @@ export const education: TimelineEntry[] = [
     title: 'BS Data Science (Mathematics focus) & BS Economics',
     org: 'Arizona State University — Barrett, The Honors College',
     dates: 'Expected May 2027',
-    description: "3.67 GPA · Dean's List · Minor in Business · Cross-Sector Leadership Certificate",
+    description: "Dean's List · Minor in Business · Cross-Sector Leadership Certificate",
   },
 ];
 
@@ -266,3 +269,11 @@ export const skills: Record<string, string[]> = {
   'ML & data': ['PyTorch', 'TensorFlow / Keras', 'scikit-learn', 'pandas', 'NumPy', 'SciPy', 'NLP', 'Jupyter'],
   'Analytics & tools': ['Excel', 'Alteryx', 'Tableau', 'Power BI', 'GitHub', 'Lucidchart'],
 };
+
+// Headline numbers shown under the hero. Empty array hides the strip.
+export const stats: { value: string; label: string }[] = [
+  { value: '88%', label: 'hit rate · Consensus Gap backtest' },
+  { value: '185', label: 'offline unit tests' },
+  { value: '9,000+', label: 'BTC observations modeled' },
+  { value: '3,000+', label: 'SoDA members served' },
+];

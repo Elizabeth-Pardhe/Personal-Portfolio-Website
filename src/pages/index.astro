@@ -1,7 +1,21 @@
 ---
-import { Icon } from 'astro-icon/components';
-import Layout from '~/layouts/PageLayout.astro';
-import { profile, about, links, projects, experience, education, leadership, skills } from '~/data/profile';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '@fontsource/jetbrains-mono/400.css';
+
+import Layout from '~/layouts/Layout.astro';
+import BarE from '~/components/BarE.astro';
+import {
+  profile,
+  about,
+  links,
+  projects,
+  experience,
+  education,
+  leadership,
+  skills,
+  stats,
+} from '~/data/profile';
 
 const metadata = {
   title: `${profile.name} — ${profile.headline}`,
@@ -9,251 +23,760 @@ const metadata = {
   description: profile.intro,
 };
 
-const initials = profile.name
-  .split(' ')
-  .map((w) => w[0])
-  .join('')
-  .slice(0, 2);
+const roman = (n: number) =>
+  ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x', 'xi', 'xii'][n] ?? String(n + 1);
 
-const socials = [
-  links.github && { label: 'GitHub', icon: 'tabler:brand-github', href: links.github },
-  links.linkedin && { label: 'LinkedIn', icon: 'tabler:brand-linkedin', href: links.linkedin },
-  links.email && { label: 'Email', icon: 'tabler:mail', href: `mailto:${links.email}` },
-].filter(Boolean) as { label: string; icon: string; href: string }[];
+const [first, ...rest] = profile.name.split(' ');
+const last = rest.join(' ');
 
-const groups = {
-  experience: { heading: 'Experience', icon: 'tabler:briefcase', items: experience },
-  education: { heading: 'Education', icon: 'tabler:school', items: education },
-};
-const timelineColumns = [[groups.experience], [groups.education]]
-  .map((col) => col.filter((g) => g.items.length))
-  .filter((col) => col.length);
+const nav = [
+  { text: 'About', href: '#about' },
+  { text: 'Work', href: '#work' },
+  { text: 'Experience', href: '#experience' },
+  { text: 'Leadership', href: '#leadership' },
+  { text: 'Contact', href: '#contact' },
+];
 
-const sectionTitle = 'text-3xl md:text-4xl font-bold tracking-tight font-heading mb-10';
+const contacts = [
+  links.email && { label: links.email, href: `mailto:${links.email}` },
+  links.linkedin && { label: 'LinkedIn', href: links.linkedin },
+  links.github && { label: 'GitHub', href: links.github },
+].filter(Boolean) as { label: string; href: string }[];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero -->
-  <section id="home" class="relative overflow-hidden">
-    <div
-      class="absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 to-transparent dark:from-slate-900/60"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 md:pt-28 md:pb-28 text-center">
-      {
-        profile.photoUrl ? (
-          <img
-            src={profile.photoUrl}
-            alt={profile.name}
-            width="144"
-            height="144"
-            class="mx-auto mb-8 h-36 w-36 rounded-full object-cover shadow-lg ring-4 ring-white dark:ring-slate-800"
-          />
-        ) : (
-          <div
-            class="mx-auto mb-8 h-28 w-28 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-4xl font-bold shadow-lg"
-            aria-hidden="true"
-          >
-            {initials}
+  <div class="site">
+    <!-- Header -->
+    <header class="hdr">
+      <div class="wrap hdr-in">
+        <a href="#top" class="brand" aria-label={`${profile.name} — home`}>
+          <BarE size={30} />
+          <span>{profile.name}</span>
+        </a>
+        <input type="checkbox" id="menu" class="menu-toggle" aria-label="Toggle menu" />
+        <label for="menu" class="menu-btn" aria-hidden="true"><span></span><span></span></label>
+        <nav class="nav" aria-label="Primary">
+          {nav.map((l) => <a href={l.href}>{l.text}</a>)}
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section class="hero wrap">
+        <div class="hero-text">
+          <p class="kicker">Data Science &amp; Economics — ASU Barrett</p>
+          <h1>
+            {first} <em>{last}</em>
+          </h1>
+          <p class="lede">{profile.intro}</p>
+          <div class="cta">
+            <a class="btn-gold" href="#work">Selected work</a>
+            <a class="btn-line" href="#contact">Get in touch</a>
           </div>
-        )
-      }
-      <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter font-heading dark:text-gray-200">
-        {profile.name}
-      </h1>
-      <p class="mt-4 text-xl md:text-2xl font-medium text-primary dark:text-blue-300">{profile.headline}</p>
+          {profile.location && <p class="loc">{profile.location}</p>}
+        </div>
+        <div class="hero-fig">
+          <BarE variant="figure" />
+        </div>
+      </section>
+
       {
-        profile.location && (
-          <p class="mt-2 text-muted dark:text-slate-400 inline-flex items-center gap-1">
-            <Icon name="tabler:map-pin" class="w-4 h-4" /> {profile.location}
-          </p>
-        )
-      }
-      <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-muted dark:text-slate-400">{profile.intro}</p>
-      <div class="mt-10 flex flex-wrap gap-4 justify-center">
-        <a class="btn-primary" href="#projects">See my work</a>
-        <a class="btn" href="#contact">Get in touch</a>
-        {
-          profile.resumeUrl && (
-            <a class="btn" href={profile.resumeUrl} target="_blank" rel="noopener">
-              <Icon name="tabler:file-cv" class="w-5 h-5 mr-2" /> Résumé
-            </a>
-          )
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="scroll-mt-16">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-      <h2 class={sectionTitle}>About me</h2>
-      <div class="space-y-5 text-lg text-muted dark:text-slate-300 leading-relaxed">
-        {about.map((p) => <p>{p}</p>)}
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="scroll-mt-16 bg-blue-50/60 dark:bg-slate-900/40">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-      <h2 class={sectionTitle}>Projects</h2>
-      <div class="grid gap-6 md:grid-cols-2">
-        {
-          projects.map((p) => (
-            <article class="flex flex-col rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-md transition">
-              <h3 class="text-xl font-semibold dark:text-white">{p.title}</h3>
-              {p.subtitle && <p class="mt-1 text-sm font-medium text-primary dark:text-blue-300">{p.subtitle}</p>}
-              {p.date && <p class="text-sm text-muted dark:text-slate-500 mt-1">{p.date}</p>}
-              <ul class="mt-3 space-y-2 text-muted dark:text-slate-400 flex-1 list-disc pl-5">
-                {p.points.map((pt) => (
-                  <li>{pt}</li>
-                ))}
-              </ul>
-              <ul class="mt-4 flex flex-wrap gap-2">
-                {p.tech.map((t) => (
-                  <li class="text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-slate-800 dark:text-blue-300 px-2.5 py-1">
-                    {t}
-                  </li>
-                ))}
-              </ul>
-              {p.href && (
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener"
-                  class="mt-5 inline-flex items-center font-medium text-primary dark:text-blue-300 hover:underline"
-                >
-                  View project <Icon name="tabler:arrow-up-right" class="w-4 h-4 ml-1" />
-                </a>
-              )}
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience / Education / Leadership -->
-  {
-    timelineColumns.length > 0 && (
-      <section id="experience" class="scroll-mt-16">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20 grid gap-12 md:grid-cols-2">
-          {timelineColumns.map((col) => (
-            <div class="space-y-14">
-              {col.map((group) => (
+        stats.length > 0 && (
+          <section class="wrap" aria-label="Highlights">
+            <div class="stats">
+              {stats.map((s) => (
                 <div>
-                  <h2 class="text-3xl font-bold tracking-tight font-heading mb-8">{group.heading}</h2>
-                  <ol class="relative border-l-2 border-blue-200 dark:border-slate-700 ml-3 space-y-8">
-                    {group.items.map((item) => (
-                      <li class="pl-8 relative">
-                        <span class="absolute -left-[17px] top-0 flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-slate-900 border-2 border-primary">
-                          <Icon name={group.icon} class="w-4 h-4 text-primary" />
-                        </span>
-                        <h3 class="text-lg font-semibold dark:text-white">{item.title}</h3>
-                        <p class="text-muted dark:text-slate-400">{item.org}</p>
-                        {item.dates && <p class="text-sm text-muted dark:text-slate-500">{item.dates}</p>}
-                        {item.description && <p class="mt-2 text-muted dark:text-slate-300">{item.description}</p>}
-                      </li>
-                    ))}
-                  </ol>
+                  <b>{s.value}</b>
+                  <span>{s.label}</span>
                 </div>
               ))}
             </div>
-          ))}
-        </div>
-      </section>
-    )
-  }
+          </section>
+        )
+      }
 
-  <!-- Leadership -->
-  {
-    leadership.length > 0 && (
-      <section id="leadership" class="scroll-mt-16 bg-blue-50/60 dark:bg-slate-900/40">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-          <h2 class={sectionTitle}>Leadership</h2>
-          <div class="grid gap-6 md:grid-cols-2">
-            {leadership.map((o) => (
-              <article class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm">
-                <div class="flex items-start gap-3">
-                  <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-slate-800">
-                    <Icon name="tabler:users-group" class="w-5 h-5 text-primary" />
-                  </span>
-                  <div>
-                    <h3 class="text-xl font-semibold dark:text-white">{o.org}</h3>
-                    <p class="text-sm text-muted dark:text-slate-500">{o.dates}</p>
-                  </div>
-                </div>
-                {o.summary && <p class="mt-3 font-medium text-gray-800 dark:text-slate-200">{o.summary}</p>}
-                <ol class="mt-4 space-y-4 border-l-2 border-blue-200 dark:border-slate-700 pl-4">
-                  {o.roles.map((r) => (
-                    <li>
-                      <p class="font-semibold dark:text-white">
-                        {r.title} <span class="ml-1 text-sm font-normal text-muted dark:text-slate-500">· {r.dates}</span>
-                      </p>
-                      {r.points && (
-                        <ul class="mt-1 list-disc pl-5 space-y-1 text-muted dark:text-slate-400">
-                          {r.points.map((pt) => (
-                            <li>{pt}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </ol>
-              </article>
-            ))}
+      <!-- About -->
+      <section id="about" class="wrap sec">
+        <div class="sec-head">
+          <span class="num">i.</span>
+          <h2>About</h2>
+        </div>
+        <div class="about">
+          {
+            profile.photoUrl && (
+              <img src={profile.photoUrl} alt={profile.name} width="200" height="200" loading="lazy" class="portrait" />
+            )
+          }
+          <div class="prose">
+            {about.map((p) => <p>{p}</p>)}
           </div>
         </div>
       </section>
-    )
-  }
 
-  <!-- Skills -->
-  <section id="skills" class="scroll-mt-16">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
-      <h2 class={sectionTitle}>Skills</h2>
-      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Work -->
+      <section id="work" class="wrap sec">
+        <div class="sec-head">
+          <span class="num">ii.</span>
+          <h2>Selected work</h2>
+        </div>
+        <ol class="work">
+          {
+            projects.map((p, i) => (
+              <li class="work-row">
+                <span class="work-n">{roman(i)}.</span>
+                <div class="work-body">
+                  <h3>
+                    {p.href ? (
+                      <a href={p.href} target="_blank" rel="noopener">
+                        {p.title} ↗
+                      </a>
+                    ) : (
+                      p.title
+                    )}
+                  </h3>
+                  {p.subtitle && <p class="gold-sub">{p.subtitle}</p>}
+                  <ul class="points">
+                    {p.points.map((pt) => (
+                      <li>{pt}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="work-meta">
+                  {p.date && <span class="date">{p.date}</span>}
+                  <ul class="tags">
+                    {p.tech.map((t) => (
+                      <li>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <!-- Experience + Education -->
+      <section id="experience" class="wrap sec">
+        <div class="sec-head">
+          <span class="num">iii.</span>
+          <h2>Experience</h2>
+        </div>
+        <ol class="tl">
+          {
+            experience.map((e) => (
+              <li>
+                <span class="date">{e.dates}</span>
+                <div>
+                  <h3>{e.title}</h3>
+                  <p class="gold-sub">{e.org}</p>
+                  {e.description && <p class="desc">{e.description}</p>}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+
         {
-          Object.entries(skills).map(([group, list]) => (
-            <div>
-              <h3 class="text-lg font-semibold mb-3 dark:text-white">{group}</h3>
-              <ul class="flex flex-wrap gap-2">
-                {list.map((s) => (
-                  <li class="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-sm">
-                    {s}
+          education.length > 0 && (
+            <>
+              <h3 class="sub-head">Education</h3>
+              <ol class="tl">
+                {education.map((e) => (
+                  <li>
+                    <span class="date">{e.dates}</span>
+                    <div>
+                      <h3>{e.title}</h3>
+                      <p class="gold-sub">{e.org}</p>
+                      {e.description && <p class="desc">{e.description}</p>}
+                    </div>
                   </li>
                 ))}
-              </ul>
-            </div>
-          ))
+              </ol>
+            </>
+          )
         }
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- Contact -->
-  <section id="contact" class="scroll-mt-16">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-24 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight font-heading mb-4">Let's connect</h2>
-      <p class="text-lg text-muted dark:text-slate-400 mb-10">
-        I'm open to data science, analytics, product, and research opportunities — I'd love to hear from you.
-      </p>
-      <div class="flex flex-wrap gap-4 justify-center">
-        {
-          socials.map((s, i) => (
-            <a
-              class={i === 0 ? 'btn-primary' : 'btn'}
-              href={s.href}
-              target={s.href.startsWith('mailto:') ? undefined : '_blank'}
-              rel="noopener"
-            >
-              <Icon name={s.icon} class="w-5 h-5 mr-2" /> {s.label}
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+      <!-- Leadership -->
+      {
+        leadership.length > 0 && (
+          <section id="leadership" class="wrap sec">
+            <div class="sec-head">
+              <span class="num">iv.</span>
+              <h2>Leadership</h2>
+            </div>
+            <div class="lead">
+              {leadership.map((o) => (
+                <article>
+                  <header>
+                    <h3>{o.org}</h3>
+                    <span class="date">{o.dates}</span>
+                  </header>
+                  {o.summary && <p class="summary">{o.summary}</p>}
+                  <ol>
+                    {o.roles.map((r) => (
+                      <li>
+                        <p class="role">
+                          {r.title} <span class="date">{r.dates}</span>
+                        </p>
+                        {r.points && (
+                          <ul class="points">
+                            {r.points.map((pt) => (
+                              <li>{pt}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                </article>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <!-- Skills -->
+      <section id="skills" class="wrap sec">
+        <div class="sec-head">
+          <span class="num">v.</span>
+          <h2>Toolkit</h2>
+        </div>
+        <div class="skills">
+          {
+            Object.entries(skills).map(([group, list]) => (
+              <div>
+                <h3>{group}</h3>
+                <p>{list.join(' · ')}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="wrap contact">
+        <p class="kicker">vi. — Contact</p>
+        <h2>Let's <em>talk.</em></h2>
+        <p class="lede">
+          I'm open to data science, analytics, product, and research opportunities — I'd love to hear from you.
+        </p>
+        <div class="contact-links">
+          {
+            contacts.map((c) => (
+              <a href={c.href} target={c.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener">
+                {c.label}
+              </a>
+            ))
+          }
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap ftr">
+      <span class="brand small"><BarE size={18} /> {profile.name}</span>
+      <span>© {new Date().getFullYear()} · Built with Astro</span>
+    </footer>
+  </div>
 </Layout>
+
+<style>
+  .site {
+    --bg: #0f1d1a;
+    --ink: #e9e4d8;
+    --muted: #b3ac9c;
+    --dim: #8f8a7d;
+    --gold: #c9a96e;
+    --line: rgba(201, 169, 110, 0.24);
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'InterVariable', Inter, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: 0;
+    min-height: 100vh;
+    overflow-x: clip;
+  }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  @media (min-width: 768px) {
+    .wrap {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+  em {
+    color: var(--gold);
+  }
+
+  /* Header */
+  .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(15, 29, 26, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .hdr-in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--serif);
+    font-size: 22px;
+  }
+  .nav {
+    display: flex;
+    gap: 30px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .nav a:hover {
+    color: var(--gold);
+  }
+  .menu-toggle,
+  .menu-btn {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .menu-btn {
+      display: grid;
+      gap: 6px;
+      cursor: pointer;
+      padding: 10px 4px;
+    }
+    .menu-btn span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--ink);
+    }
+    .nav {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 24px 16px;
+    }
+    .nav a {
+      padding: 12px 0;
+    }
+    .menu-toggle:checked ~ .nav {
+      display: flex;
+    }
+  }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    gap: 56px;
+    align-items: center;
+    padding-top: 96px;
+    padding-bottom: 72px;
+  }
+  @media (min-width: 960px) {
+    .hero {
+      grid-template-columns: 1.2fr 1fr;
+      padding-top: 120px;
+      padding-bottom: 96px;
+    }
+  }
+  .kicker {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .hero h1 {
+    font-size: clamp(56px, 9vw, 104px);
+    line-height: 1;
+    margin: 22px 0 26px;
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 34em;
+  }
+  .cta {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    align-items: center;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .btn-gold {
+    padding: 14px 26px;
+    background: var(--gold);
+    color: var(--bg);
+    transition: background 0.2s;
+  }
+  .btn-gold:hover {
+    background: #dec492;
+  }
+  .btn-line {
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 3px;
+  }
+  .btn-line:hover {
+    color: var(--gold);
+  }
+  .loc {
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dim);
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 768px) {
+    .stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .stats > div {
+    padding: 26px 16px 26px 0;
+  }
+  .stats b {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.1;
+    color: var(--gold);
+  }
+  .stats span {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+  }
+
+  /* Sections */
+  .sec {
+    padding-top: 112px;
+    scroll-margin-top: 40px;
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
+  }
+  .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+  }
+  .sec-head h2 {
+    font-size: clamp(40px, 5vw, 56px);
+    line-height: 1;
+  }
+  .gold-sub {
+    color: var(--gold);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .date {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+  .points {
+    margin-top: 12px;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .points li {
+    list-style: none;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .points li::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0.8em;
+    width: 7px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* About */
+  .about {
+    display: grid;
+    gap: 40px;
+    padding-top: 32px;
+  }
+  @media (min-width: 768px) {
+    .about {
+      grid-template-columns: 200px 1fr;
+      gap: 56px;
+    }
+  }
+  .portrait {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    padding: 5px;
+    filter: saturate(0.85);
+  }
+  @media (min-width: 768px) {
+    .portrait {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  .prose p {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    max-width: 40em;
+  }
+  .prose p:first-child {
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  /* Work */
+  .work-row {
+    display: grid;
+    gap: 12px 32px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 768px) {
+    .work-row {
+      grid-template-columns: 56px 1fr 220px;
+    }
+  }
+  .work-n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+  }
+  .work-body h3 {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+  .work-body h3 a:hover {
+    color: var(--gold);
+  }
+  .work-meta .date {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tags li {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+  }
+
+  /* Timeline */
+  .tl li {
+    display: grid;
+    gap: 4px 32px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 768px) {
+    .tl li {
+      grid-template-columns: 200px 1fr;
+    }
+  }
+  .tl .date {
+    padding-top: 8px;
+  }
+  .tl h3 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+  .desc {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 46em;
+  }
+  .sub-head {
+    margin-top: 64px;
+    font-size: 30px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Leadership */
+  .lead {
+    display: grid;
+    padding-top: 8px;
+  }
+  @media (min-width: 900px) {
+    .lead {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 56px;
+    }
+  }
+  .lead article {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .lead header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4px 16px;
+  }
+  .lead h3 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+  .summary {
+    margin-top: 8px;
+    color: var(--gold);
+    font-size: 14px;
+  }
+  .lead ol {
+    margin-top: 16px;
+    border-left: 1px solid var(--line);
+    padding-left: 18px;
+  }
+  .lead ol > li + li {
+    margin-top: 14px;
+  }
+  .role {
+    font-weight: 500;
+  }
+  .role .date {
+    margin-left: 6px;
+    font-weight: 400;
+  }
+  .lead .points {
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  /* Skills */
+  .skills {
+    display: grid;
+    gap: 32px;
+    padding-top: 32px;
+  }
+  @media (min-width: 768px) {
+    .skills {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+  }
+  .skills h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  .skills p {
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  /* Contact */
+  .contact {
+    padding-top: 144px;
+    padding-bottom: 112px;
+    text-align: center;
+    scroll-margin-top: 40px;
+  }
+  .contact h2 {
+    font-size: clamp(64px, 10vw, 120px);
+    line-height: 1;
+    margin: 20px 0 24px;
+  }
+  .contact .lede {
+    margin: 0 auto;
+  }
+  .contact-links {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 36px;
+    font-size: 15px;
+  }
+  .contact-links a {
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+  }
+  .contact-links a:hover {
+    color: var(--gold);
+  }
+
+  /* Footer */
+  .ftr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 28px;
+    padding-bottom: 40px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--dim);
+  }
+  .brand.small {
+    font-size: 17px;
+    gap: 8px;
+    color: var(--ink);
+  }
+</style>
