@@ -28,11 +28,11 @@ export const shortVersion = {
   items: [
     {
       title: 'Start with the question',
-      text: "Whether it is a chest X-ray, a speech in Congress or a company's earnings, I begin by asking what we are really trying to learn and why it matters.",
+      text: "Whether it's a chest X-ray, a speech in Congress or a company's earnings, I start by asking what we're really trying to learn and why it matters.",
     },
     {
       title: 'Separate signal from noise',
-      text: 'My research has dealt with medical images, political speech and genetic data, and my finance projects pull from filings, news and trading records. In each one the hard part is proving which patterns are real. That is why Consensus Gap only keeps a claim if its exact quote appears in the source.',
+      text: "My research has dealt with medical images, political speech and genetic data, and my finance projects pull from filings, news and trading records. In each one the hard part is proving which patterns are real. That's why Consensus Gap only keeps a claim if its exact quote appears in the source.",
     },
     {
       title: 'Build things people use',
@@ -53,7 +53,7 @@ export const shortVersion = {
 
 // Closing paragraphs after "The short version"
 export const about = [
-  'I like taking something ambiguous, researching it until a direction becomes clear, and then explaining what I found in a way anyone can follow. That is why my work keeps landing between data, economics and product: I want to understand what is happening, back it up with evidence, and turn it into something someone can use.',
+  "I like taking something ambiguous, researching it until a direction becomes clear, and then explaining what I found in a way anyone can follow. That's why my work keeps landing between data, economics and product: I want to understand what's happening, back it up with evidence, and turn it into something someone can use.",
 ];
 
 export const links = {
@@ -96,7 +96,7 @@ export const projects: Project[] = [
       "A study of whether the balance of buyers and sellers in Bitcoin over short windows explains where its price goes, and whether it can predict the next move.",
     points: [
       'Collected 9,000+ short-interval Bitcoin trading records and removed the long stretches with no trading, so the analysis only counted real activity.',
-      'Found that buying and selling pressure explains about 5% of short-term price movement but does little to predict the next move, which is what you would expect in a market this heavily traded.',
+      "Found that buying and selling pressure explains about 5% of short-term price movement but does little to predict the next move, which is what you'd expect in a market this heavily traded.",
     ],
     tech: ['Python', 'pandas', 'Statistics', 'Regression'],
   },
