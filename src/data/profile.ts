@@ -25,7 +25,7 @@ export const about = [
 
 export const links = {
   github: 'https://github.com/Elizabeth-Pardhe',
-  linkedin: '', // e.g. 'https://www.linkedin.com/in/your-handle'
+  linkedin: 'https://www.linkedin.com/in/elizabeth-pardhe/',
   email: '', // e.g. 'you@example.com' — leave '' to keep it off the public site
 };
 
