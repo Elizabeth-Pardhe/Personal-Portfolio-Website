@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
-import { profile, about, links, projects, experience, education, skills } from '~/data/profile';
+import { profile, about, links, projects, experience, education, leadership, skills } from '~/data/profile';
 
 const metadata = {
   title: `${profile.name} — ${profile.headline}`,
@@ -21,10 +21,15 @@ const socials = [
   links.email && { label: 'Email', icon: 'tabler:mail', href: `mailto:${links.email}` },
 ].filter(Boolean) as { label: string; icon: string; href: string }[];
 
-const timeline = [
-  ...(experience.length ? [{ heading: 'Experience', icon: 'tabler:briefcase', items: experience }] : []),
-  ...(education.length ? [{ heading: 'Education', icon: 'tabler:school', items: education }] : []),
-];
+const groups = {
+  experience: { heading: 'Experience', icon: 'tabler:briefcase', items: experience },
+  education: { heading: 'Education', icon: 'tabler:school', items: education },
+  leadership: { heading: 'Leadership', icon: 'tabler:users-group', items: leadership },
+};
+// Two columns: experience on the left; education + leadership stacked on the right
+const timelineColumns = [[groups.experience], [groups.education, groups.leadership]]
+  .map((col) => col.filter((g) => g.items.length))
+  .filter((col) => col.length);
 
 const sectionTitle = 'text-3xl md:text-4xl font-bold tracking-tight font-heading mb-10';
 ---
@@ -38,12 +43,24 @@ const sectionTitle = 'text-3xl md:text-4xl font-bold tracking-tight font-heading
     >
     </div>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 md:pt-28 md:pb-28 text-center">
-      <div
-        class="mx-auto mb-8 h-28 w-28 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-4xl font-bold shadow-lg"
-        aria-hidden="true"
-      >
-        {initials}
-      </div>
+      {
+        profile.photoUrl ? (
+          <img
+            src={profile.photoUrl}
+            alt={profile.name}
+            width="144"
+            height="144"
+            class="mx-auto mb-8 h-36 w-36 rounded-full object-cover shadow-lg ring-4 ring-white dark:ring-slate-800"
+          />
+        ) : (
+          <div
+            class="mx-auto mb-8 h-28 w-28 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-4xl font-bold shadow-lg"
+            aria-hidden="true"
+          >
+            {initials}
+          </div>
+        )
+      }
       <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter font-heading dark:text-gray-200">
         {profile.name}
       </h1>
@@ -88,8 +105,13 @@ const sectionTitle = 'text-3xl md:text-4xl font-bold tracking-tight font-heading
         {
           projects.map((p) => (
             <article class="flex flex-col rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-md transition">
-              <h3 class="text-xl font-semibold mb-2 dark:text-white">{p.title}</h3>
-              <p class="text-muted dark:text-slate-400 flex-1">{p.description}</p>
+              <h3 class="text-xl font-semibold dark:text-white">{p.title}</h3>
+              {p.date && <p class="text-sm text-muted dark:text-slate-500 mt-1">{p.date}</p>}
+              <ul class="mt-3 space-y-2 text-muted dark:text-slate-400 flex-1 list-disc pl-5">
+                {p.points.map((pt) => (
+                  <li>{pt}</li>
+                ))}
+              </ul>
               <ul class="mt-4 flex flex-wrap gap-2">
                 {p.tech.map((t) => (
                   <li class="text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-slate-800 dark:text-blue-300 px-2.5 py-1">
@@ -114,27 +136,31 @@ const sectionTitle = 'text-3xl md:text-4xl font-bold tracking-tight font-heading
     </div>
   </section>
 
-  <!-- Experience / Education -->
+  <!-- Experience / Education / Leadership -->
   {
-    timeline.length > 0 && (
+    timelineColumns.length > 0 && (
       <section id="experience" class="scroll-mt-16">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20 grid gap-12 md:grid-cols-2">
-          {timeline.map((group) => (
-            <div>
-              <h2 class="text-3xl font-bold tracking-tight font-heading mb-8">{group.heading}</h2>
-              <ol class="relative border-l-2 border-blue-200 dark:border-slate-700 ml-3 space-y-8">
-                {group.items.map((item) => (
-                  <li class="pl-8 relative">
-                    <span class="absolute -left-[17px] top-0 flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-slate-900 border-2 border-primary">
-                      <Icon name={group.icon} class="w-4 h-4 text-primary" />
-                    </span>
-                    <h3 class="text-lg font-semibold dark:text-white">{item.title}</h3>
-                    <p class="text-muted dark:text-slate-400">{item.org}</p>
-                    {item.dates && <p class="text-sm text-muted dark:text-slate-500">{item.dates}</p>}
-                    {item.description && <p class="mt-2 text-muted dark:text-slate-300">{item.description}</p>}
-                  </li>
-                ))}
-              </ol>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20 grid gap-12 md:grid-cols-2">
+          {timelineColumns.map((col) => (
+            <div class="space-y-14">
+              {col.map((group) => (
+                <div>
+                  <h2 class="text-3xl font-bold tracking-tight font-heading mb-8">{group.heading}</h2>
+                  <ol class="relative border-l-2 border-blue-200 dark:border-slate-700 ml-3 space-y-8">
+                    {group.items.map((item) => (
+                      <li class="pl-8 relative">
+                        <span class="absolute -left-[17px] top-0 flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-slate-900 border-2 border-primary">
+                          <Icon name={group.icon} class="w-4 h-4 text-primary" />
+                        </span>
+                        <h3 class="text-lg font-semibold dark:text-white">{item.title}</h3>
+                        <p class="text-muted dark:text-slate-400">{item.org}</p>
+                        {item.dates && <p class="text-sm text-muted dark:text-slate-500">{item.dates}</p>}
+                        {item.description && <p class="mt-2 text-muted dark:text-slate-300">{item.description}</p>}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
             </div>
           ))}
         </div>
