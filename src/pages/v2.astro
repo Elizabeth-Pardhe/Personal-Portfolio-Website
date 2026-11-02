@@ -1,0 +1,910 @@
+---
+/**
+ * Chapter-style version of the site. Same content as the homepage, told as a
+ * series of questions, with a clickable bar-chart E that follows you as you scroll.
+ */
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '@fontsource/jetbrains-mono/400.css';
+
+import Layout from '~/layouts/Layout.astro';
+import {
+  profile,
+  links,
+  projects,
+  experience,
+  education,
+  leadership,
+  skills,
+  shortVersion,
+  chapters,
+} from '~/data/profile';
+
+const metadata = {
+  title: `${profile.name} | ${profile.headline}`,
+  ignoreTitleTemplate: true,
+  description: profile.intro,
+  robots: { index: false, follow: false },
+};
+
+const dataProjects = projects.filter((p) => p.area === 'data');
+const econProjects = projects.filter((p) => p.area === 'economics');
+const dataRoles = experience.filter((e) => e.area === 'data' && e.title !== 'AI Intern');
+const econRoles = experience.filter((e) => e.area === 'economics');
+const howItems = shortVersion.items.filter((it) => !it.linkUrl && it.title !== 'Bring people with me');
+const funItem = shortVersion.items.find((it) => it.linkUrl);
+
+const bars = [
+  { area: 'data', label: 'data', href: '#build', width: 250, color: 'var(--gold)', text: '#1b1d1c' },
+  { area: 'economics', label: 'economics', href: '#markets', width: 165, color: 'var(--blue)', text: '#fff' },
+  { area: 'people', label: 'people', href: '#lead', width: 310, color: 'var(--pink)', text: '#1b1d1c' },
+];
+
+const toc = [
+  { id: 'hello', label: 'Hello' },
+  { id: 'how', label: chapters.how.question },
+  { id: 'build', label: chapters.build.question },
+  { id: 'markets', label: chapters.markets.question },
+  { id: 'lead', label: chapters.lead.question },
+  { id: 'fun', label: chapters.fun.question },
+  { id: 'contact', label: chapters.contact.question },
+];
+
+const contacts = [
+  links.email && { label: 'Email', href: `mailto:${links.email}` },
+  links.linkedin && { label: 'LinkedIn', href: links.linkedin },
+  links.github && { label: 'GitHub', href: links.github },
+  links.instagram && { label: 'Photography', href: links.instagram },
+].filter(Boolean) as { label: string; href: string }[];
+
+const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(--pink)' } as const;
+---
+
+<Layout metadata={metadata}>
+  <div class="v2">
+    <header class="top wrap">
+      <a href="#hello" class="brand">
+        <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+          <rect x="2" y="2" width="4" height="22" fill="#1b1d1c"></rect>
+          <rect x="6" y="2" width="15" height="5" fill="#c9a96e"></rect>
+          <rect x="6" y="10.5" width="9" height="5" fill="#2d4fd6"></rect>
+          <rect x="6" y="19" width="18" height="5" fill="#eea3c2"></rect>
+        </svg>
+        {profile.name}
+      </a>
+      <nav class="top-links">
+        {contacts.slice(0, 3).map((c) => <a href={c.href} target={c.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener">{c.label}</a>)}
+      </nav>
+    </header>
+
+    <!-- Mobile: compact sticky bar version of the E -->
+    <nav class="mini-e" aria-label="Jump to a part of me">
+      {
+        bars.map((b) => (
+          <a href={b.href} data-area={b.area} style={`--c:${b.color};--w:${b.width}`}>
+            <i></i>
+            {b.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="wrap grid">
+      <!-- Sticky E (desktop) -->
+      <aside class="rail">
+        <div class="ebox">
+          <svg viewBox="0 0 410 316" role="img" aria-label="The E in Elizabeth as a bar chart. Each bar jumps to a chapter.">
+            <g class="axis">
+              <line x1="54" y1="16" x2="54" y2="284"></line>
+              <line x1="139" y1="16" x2="139" y2="284"></line>
+              <line x1="224" y1="16" x2="224" y2="284"></line>
+              <line x1="309" y1="16" x2="309" y2="284"></line>
+              <text x="54" y="304">0</text>
+              <text x="139" y="304">25</text>
+              <text x="224" y="304">50</text>
+              <text x="309" y="304">75</text>
+              <text x="394" y="304">100</text>
+            </g>
+            <rect x="28" y="24" width="26" height="252" fill="#f4efe6"></rect>
+            {
+              bars.map((b, i) => (
+                <a href={b.href} class="bar" data-area={b.area}>
+                  <rect x="54" y={24 + i * 95} width={b.width} height="62" rx="6" style={`fill:${b.color}`} />
+                  <text x="72" y={60 + i * 95} style={`fill:${b.text}`}>
+                    {b.label}
+                  </text>
+                  <text class="arrow" x={54 + b.width - 16} y={60 + i * 95} text-anchor="end" style={`fill:${b.text}`}>
+                    →
+                  </text>
+                </a>
+              ))
+            }
+          </svg>
+        </div>
+        <p class="hint">
+          <em>Fig. 1.</em> Elizabeth, by experience. n = 1, self-reported. Tap a bar to explore.
+        </p>
+        <ol class="toc">
+          {
+            toc.map((t) => (
+              <li>
+                <a href={`#${t.id}`} data-toc={t.id}>
+                  {t.label}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </aside>
+
+      <main class="story">
+        <!-- Hello -->
+        <section id="hello" class="chapter" data-area="">
+          <div class="hello">
+            {profile.photoUrl && <img src={profile.photoUrl} alt={profile.name} width="112" height="112" />}
+            <div>
+              <h1>Hi, I'm <em>Elizabeth.</em></h1>
+              <p class="lede">{profile.intro}</p>
+            </div>
+          </div>
+          <div class="bubble">
+            <p>{shortVersion.lead}</p>
+            {
+              profile.now?.length > 0 && (
+                <p class="now">
+                  <span>Currently</span>
+                  {profile.now.join(' · ')}
+                </p>
+              )
+            }
+          </div>
+          <p class="scroll-cue">Scroll, or tap a bar of the E ↓</p>
+        </section>
+
+        <!-- How I work -->
+        <section id="how" class="chapter" data-area="">
+          <p class="kicker">Chapter i · How I work</p>
+          <h2>{chapters.how.question}</h2>
+          <div class="how">
+            {
+              howItems.map((it, i) => (
+                <div class="how-item" style={`--c:${['var(--gold)', 'var(--blue)', 'var(--pink)'][i % 3]}`}>
+                  <span class="bar" />
+                  <h3>{it.title}</h3>
+                  <p>{it.text}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="toolkit">
+            {
+              Object.entries(skills).map(([group, list]) => (
+                <div>
+                  <h4>{group}</h4>
+                  <p>{list.join(' · ')}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="edu">
+            {
+              education.map((e) => (
+                <p>
+                  <b>{e.title}</b>, {e.org} <span>{e.dates}</span>
+                </p>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Data -->
+        <section id="build" class="chapter" data-area="data">
+          <p class="kicker" style="--c:var(--gold-ink)">Chapter ii · Data</p>
+          <h2>{chapters.build.question}</h2>
+          <div class="bubble">
+            <p>{chapters.build.answer}</p>
+            <div class="cards">
+              {
+                dataProjects.map((p) => (
+                  <details class="card" style={`--c:${areaColor.data}`}>
+                    <summary>
+                      <span class="t">{p.title}</span>
+                      <span class="m">{[p.subtitle, p.date].filter(Boolean).join(' · ')}</span>
+                      <span class="b">{p.blurb}</span>
+                      <span class="more">More</span>
+                    </summary>
+                    <ul class="pts">
+                      {p.points.map((pt) => (
+                        <li>{pt}</li>
+                      ))}
+                    </ul>
+                    <p class="tags">{p.tech.join(' · ')}</p>
+                    {p.note && <p class="note">{p.note}</p>}
+                  </details>
+                ))
+              }
+              {
+                dataRoles.map((e) => (
+                  <details class="card" style={`--c:${areaColor.data}`}>
+                    <summary>
+                      <span class="t">{e.title}</span>
+                      <span class="m">{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
+                      <span class="more">More</span>
+                    </summary>
+                    <p class="desc">{e.description}</p>
+                  </details>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- Economics -->
+        <section id="markets" class="chapter" data-area="economics">
+          <p class="kicker" style="--c:var(--blue)">Chapter iii · Economics</p>
+          <h2>{chapters.markets.question}</h2>
+          <div class="bubble">
+            <p>{chapters.markets.answer}</p>
+            <div class="cards">
+              {
+                econProjects.map((p) => (
+                  <details class="card" style={`--c:${areaColor.economics}`}>
+                    <summary>
+                      <span class="t">{p.title}</span>
+                      <span class="m">{[p.subtitle, p.date].filter(Boolean).join(' · ')}</span>
+                      <span class="b">{p.blurb}</span>
+                      <span class="more">More</span>
+                    </summary>
+                    <ul class="pts">
+                      {p.points.map((pt) => (
+                        <li>{pt}</li>
+                      ))}
+                    </ul>
+                    <p class="tags">{p.tech.join(' · ')}</p>
+                    {p.note && <p class="note">{p.note}</p>}
+                  </details>
+                ))
+              }
+              {
+                econRoles.map((e) => (
+                  <details class="card" style={`--c:${areaColor.economics}`}>
+                    <summary>
+                      <span class="t">{e.title}</span>
+                      <span class="m">{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
+                      <span class="more">More</span>
+                    </summary>
+                    <p class="desc">{e.description}</p>
+                  </details>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- People -->
+        <section id="lead" class="chapter" data-area="people">
+          <p class="kicker" style="--c:var(--pink-ink)">Chapter iv · People</p>
+          <h2>{chapters.lead.question}</h2>
+          <div class="bubble">
+            <p>{chapters.lead.answer}</p>
+            <div class="cards">
+              {
+                leadership.map((o) => (
+                  <details class="card" style={`--c:${areaColor.people}`}>
+                    <summary>
+                      <span class="t">{o.org}</span>
+                      <span class="m">
+                        {o.roles[0]?.title} · {o.dates}
+                      </span>
+                      {o.summary && <span class="b">{o.summary}</span>}
+                      <span class="more">More</span>
+                    </summary>
+                    <ul class="roles">
+                      {o.roles.map((r) => (
+                        <li>
+                          <span>{r.title}</span>
+                          <span class="d">{r.dates}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <ul class="pts">
+                      {o.roles
+                        .flatMap((r) => r.points ?? [])
+                        .map((pt) => (
+                          <li>{pt}</li>
+                        ))}
+                    </ul>
+                  </details>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- Fun -->
+        <section id="fun" class="chapter" data-area="">
+          <p class="kicker">Chapter v · Off the clock</p>
+          <h2>{chapters.fun.question}</h2>
+          {
+            funItem && (
+              <div class="bubble">
+                <p>
+                  {funItem.text}{' '}
+                  <a class="ink" href={funItem.linkUrl} target="_blank" rel="noopener">{funItem.linkLabel}</a>{'.'}
+                </p>
+              </div>
+            )
+          }
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="chapter last" data-area="">
+          <p class="kicker">The end, for now</p>
+          <h2>{chapters.contact.question}</h2>
+          <p class="lede">{chapters.contact.answer}</p>
+          <div class="contact-links">
+            {
+              contacts.map((c) => (
+                <a href={c.href} target={c.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener">
+                  {c.label}
+                </a>
+              ))
+            }
+          </div>
+          <p class="foot">© {new Date().getFullYear()} {profile.name}</p>
+        </section>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function setup() {
+    const root = document.querySelector('.v2');
+    if (!root) return;
+    const chapters = Array.from(root.querySelectorAll<HTMLElement>('.chapter'));
+    const setActive = (el: HTMLElement) => {
+      const area = el.dataset.area || '';
+      root.dataset.active = area;
+      root.querySelectorAll<HTMLElement>('[data-toc]').forEach((a) => a.classList.toggle('on', a.dataset.toc === el.id));
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length) setActive(visible[0].target as HTMLElement);
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    chapters.forEach((c) => io.observe(c));
+  }
+  setup();
+  document.addEventListener('astro:after-swap', setup);
+</script>
+
+<style>
+  .v2 {
+    --bg: #f4efe6;
+    --ink: #1b1d1c;
+    --muted: #4e4a43;
+    --dim: #7a7263;
+    --gold: #c9a96e;
+    --gold-ink: #8a6a2c;
+    --blue: #2d4fd6;
+    --pink: #eea3c2;
+    --pink-ink: #c2477a;
+    --line: #e2d9c8;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'InterVariable', Inter, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    letter-spacing: 0;
+    min-height: 100vh;
+    overflow-x: clip;
+  }
+  :global(html:has(.v2)),
+  :global(body:has(.v2)) {
+    background: #f4efe6;
+  }
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  @media (min-width: 900px) {
+    .wrap {
+      padding: 0 48px;
+    }
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+  }
+  em {
+    color: var(--gold-ink);
+  }
+
+  /* Top bar */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif);
+    font-size: 22px;
+  }
+  .top-links {
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .top-links a:hover {
+    color: var(--pink-ink);
+  }
+
+  /* Layout */
+  .grid {
+    display: grid;
+    gap: 48px;
+  }
+  @media (min-width: 900px) {
+    .grid {
+      grid-template-columns: 400px 1fr;
+      gap: 64px;
+    }
+  }
+
+  /* Sticky E */
+  .rail {
+    display: none;
+  }
+  @media (min-width: 900px) {
+    .rail {
+      display: block;
+      position: sticky;
+      top: 24px;
+      align-self: start;
+    }
+  }
+  .ebox {
+    background: var(--ink);
+    border-radius: 22px;
+    padding: 18px 14px;
+  }
+  .ebox svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .ebox .bar text {
+    font-family: var(--serif);
+    font-size: 22px;
+    pointer-events: none;
+  }
+  .ebox .bar .arrow {
+    font-family: var(--mono);
+    font-size: 13px;
+    opacity: 0.7;
+  }
+  .ebox .bar rect {
+    transition:
+      opacity 0.35s,
+      transform 0.35s;
+    transform-box: fill-box;
+    transform-origin: left center;
+  }
+  .ebox .bar:hover rect {
+    filter: brightness(1.08);
+  }
+  .v2[data-active='data'] .ebox .bar:not([data-area='data']) rect,
+  .v2[data-active='economics'] .ebox .bar:not([data-area='economics']) rect,
+  .v2[data-active='people'] .ebox .bar:not([data-area='people']) rect {
+    opacity: 0.35;
+  }
+  .v2[data-active='data'] .ebox .bar[data-area='data'] rect,
+  .v2[data-active='economics'] .ebox .bar[data-area='economics'] rect,
+  .v2[data-active='people'] .ebox .bar[data-area='people'] rect {
+    transform: scaleX(1.06);
+  }
+  .ebox .axis line {
+    stroke: rgba(244, 239, 230, 0.1);
+  }
+  .ebox .axis text {
+    font-family: var(--mono);
+    font-size: 10px;
+    fill: rgba(244, 239, 230, 0.45);
+    text-anchor: middle;
+  }
+  .hint {
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+  .hint em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold-ink);
+  }
+  .toc {
+    margin-top: 22px;
+    border-left: 1px solid var(--line);
+  }
+  .toc a {
+    display: block;
+    padding: 5px 0 5px 16px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    font-size: 14px;
+    color: var(--dim);
+    transition: color 0.2s;
+  }
+  .toc a:hover {
+    color: var(--ink);
+  }
+  .toc a.on {
+    color: var(--ink);
+    border-left-color: var(--ink);
+  }
+
+  /* Mobile compact E */
+  .mini-e {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    gap: 8px;
+    padding: 10px 24px;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 900px) {
+    .mini-e {
+      display: none;
+    }
+  }
+  .mini-e a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--muted);
+    flex: var(--w) 1 0;
+  }
+  .mini-e i {
+    display: block;
+    height: 8px;
+    border-radius: 0 4px 4px 0;
+    background: var(--c);
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+  .v2[data-active='data'] .mini-e a[data-area='data'] i,
+  .v2[data-active='economics'] .mini-e a[data-area='economics'] i,
+  .v2[data-active='people'] .mini-e a[data-area='people'] i {
+    opacity: 1;
+  }
+
+  /* Chapters */
+  .chapter {
+    padding: 24px 0 96px;
+    scroll-margin-top: 64px;
+  }
+  @media (min-width: 900px) {
+    .chapter {
+      scroll-margin-top: 24px;
+    }
+  }
+  .kicker {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--c, var(--dim));
+  }
+  .chapter h2 {
+    font-size: clamp(38px, 5vw, 52px);
+    line-height: 1.05;
+    margin: 8px 0 22px;
+  }
+  .hello {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 26px;
+  }
+  .hello img {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--gold);
+    flex-shrink: 0;
+  }
+  .hello h1 {
+    font-size: clamp(46px, 6vw, 68px);
+    line-height: 1;
+  }
+  .lede {
+    margin-top: 10px;
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 34em;
+  }
+  @media (max-width: 600px) {
+    .hello {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  .bubble {
+    background: #fff;
+    border-radius: 20px 20px 20px 6px;
+    padding: 22px 24px;
+    box-shadow: 0 10px 30px rgba(60, 45, 20, 0.07);
+  }
+  .bubble > p {
+    font-size: 17px;
+  }
+  .now {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 15px !important;
+    color: var(--muted);
+  }
+  .now span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+  }
+  .scroll-cue {
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dim);
+  }
+
+  /* Cards */
+  .cards {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .card {
+    border: 1px solid #ece4d6;
+    border-left: 5px solid var(--c);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fffdf9;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover {
+    box-shadow: 0 6px 18px rgba(60, 45, 20, 0.08);
+  }
+  .card summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    gap: 2px;
+    position: relative;
+    padding-right: 64px;
+  }
+  .card summary::-webkit-details-marker {
+    display: none;
+  }
+  .card .t {
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 1.2;
+  }
+  .card .m {
+    font-size: 13px;
+    color: var(--dim);
+  }
+  .card .b {
+    margin-top: 6px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .card .more {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+  }
+  @media (max-width: 600px) {
+    .card summary {
+      padding-right: 0;
+    }
+    .card .more {
+      position: static;
+      margin-top: 6px;
+    }
+    .brand {
+      font-size: 19px;
+      white-space: nowrap;
+    }
+    .top-links {
+      gap: 14px;
+      font-size: 13px;
+    }
+  }
+  .card .more::after {
+    content: ' +';
+  }
+  .card[open] .more::after {
+    content: ' −';
+  }
+  .card .pts {
+    margin-top: 12px;
+    padding-left: 18px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .card .pts li {
+    list-style: disc;
+    margin-bottom: 6px;
+  }
+  .card .tags,
+  .card .note {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .card .desc {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .card .roles {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .card .roles li {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    padding: 5px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .card .roles .d {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+  }
+
+  /* How I work */
+  .how {
+    display: grid;
+    gap: 22px;
+  }
+  @media (min-width: 700px) {
+    .how {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 32px;
+    }
+  }
+  .how-item .bar {
+    display: block;
+    width: 48px;
+    height: 4px;
+    background: var(--c);
+    margin-bottom: 12px;
+  }
+  .how-item h3 {
+    font-size: 26px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .how-item p {
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .toolkit {
+    display: grid;
+    gap: 18px;
+    margin-top: 40px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  @media (min-width: 700px) {
+    .toolkit {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .toolkit h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+    margin-bottom: 6px;
+  }
+  .toolkit p {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .edu {
+    margin-top: 26px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .edu b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .edu span {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    margin-left: 6px;
+  }
+  .ink {
+    color: var(--pink-ink);
+    border-bottom: 1px solid currentColor;
+  }
+
+  /* Contact */
+  .last {
+    padding-bottom: 64px;
+  }
+  .contact-links {
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .contact-links a {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    font-size: 15px;
+    transition:
+      border-color 0.2s,
+      color 0.2s;
+  }
+  .contact-links a:nth-child(3n + 1) {
+    border-color: var(--gold);
+  }
+  .contact-links a:nth-child(3n + 2) {
+    border-color: #9fb0ee;
+  }
+  .contact-links a:nth-child(3n) {
+    border-color: var(--pink);
+  }
+  .contact-links a:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .foot {
+    margin-top: 64px;
+    font-size: 12px;
+    color: var(--dim);
+  }
+</style>

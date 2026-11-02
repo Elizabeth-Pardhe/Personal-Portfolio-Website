@@ -35,7 +35,7 @@ export const shortVersion = {
     },
     {
       title: 'Build things people use',
-      text: "I like turning analysis into something people can pick up and use, like the testing setup I built at the Learning Engineering Institute so my team can check how an AI reading assistant behaves.",
+      text: "I like turning analysis into something people can pick up and use, like the data pipeline I built for Archie, an AI reading companion my team at the Learning Engineering Institute is using in its research.",
     },
     {
       title: 'Bring people with me',
@@ -69,11 +69,30 @@ export interface Project {
   tech: string[];
   href?: string; // live demo or repo
   note?: string; // small note under the tags, e.g. "Demo available on request"
+  area?: 'data' | 'economics' | 'people'; // which bar of the E this belongs to
 }
 
 export const projects: Project[] = [
   {
+    title: 'Archie',
+    area: 'data',
+    subtitle: 'AI reading companion · ASU Learning Engineering Institute',
+    date: 'Fall 2026',
+    blurb:
+      "A research tool that studies whether AI help strengthens a student's thinking or replaces it. It pays attention to how someone reads and can offer a short prompt, and I built the part that captures and stores all of that reading activity.",
+    points: [
+      'Every move a reader makes, from a highlight to a long pause, gets saved with a timestamp and the exact paragraph it happened in.',
+      "Activity goes into a database for the research team, while each student's highlights and notes are saved as files they own and can open and edit themselves. I also built a developer view that traces any highlight from the database to its file.",
+      'Soft highlights are tracked without ever recording what the reader selected, and tracking only starts once someone shows that habit.',
+      'Before any real students used it, I tested the whole flow in a live browser with a synthetic dataset of 268 reading events, and I found and fixed two bugs that were overcounting reading time.',
+      "I merged a teammate's reading interface into the project, wrote the team's data guide, and presented the work at lab meetings.",
+    ],
+    tech: ['Python', 'SQLite', 'TypeScript', 'React', 'Synthetic data', 'Browser testing'],
+    note: 'Built with AI-assisted development',
+  },
+  {
     title: 'Consensus Gap',
+    area: 'economics',
     subtitle: 'Longaeva AI Hack-a-Thon · Advanced to Stage 2',
     blurb:
       "A research tool that reads a company's public filings, economic data and news coverage to spot early signs that its business is changing, before the next earnings report confirms it.",
@@ -87,6 +106,7 @@ export const projects: Project[] = [
   },
   {
     title: "How Buying Pressure Moves Bitcoin's Price",
+    area: 'economics',
     subtitle: 'Market microstructure study',
     date: 'Spring 2026',
     blurb:
@@ -99,6 +119,7 @@ export const projects: Project[] = [
   },
   {
     title: 'QuantumConnect',
+    area: 'economics',
     subtitle: '1st Place · AKPsi × Investment and Finance Association AI Case Competition',
     blurb:
       'With a team of four, I pitched an app that helps everyday people manage their money and gives an investment firm a new way to reach clients. We won first place.',
@@ -111,6 +132,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Coding Course for Airmen at Luke Air Force Base',
+    area: 'data',
     subtitle: 'PAF 215 Project · Developer',
     date: 'Jan 2024 – May 2024',
     blurb: 'A beginner coding course that teaches airmen to build their own apps and dashboards for the base.',
@@ -127,19 +149,22 @@ export interface TimelineEntry {
   org: string;
   dates?: string;
   description?: string;
+  area?: 'data' | 'economics' | 'people';
 }
 
 // Empty array hides the section.
 export const experience: TimelineEntry[] = [
   {
     title: 'AI Intern',
+    area: 'data',
     org: 'ASU Learning Engineering Institute',
     dates: 'Fall 2026',
     description:
-      'Built a realistic practice dataset of how students use an AI reading assistant (268 simulated reading events across 4 readings), plus the system that records and checks that data, so the team can test the assistant reliably.',
+      "Built the data layer for Archie, a research project studying whether AI support strengthens a student's thinking or replaces it. My work covers how reading activity gets captured, stored and tested.",
   },
   {
     title: 'Machine Learning Researcher, C-SPAN Project',
+    area: 'data',
     org: 'The Data Mine, Purdue University',
     dates: 'Aug 2025 – Apr 2026',
     description:
@@ -147,6 +172,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: 'Undergraduate Researcher',
+    area: 'data',
     org: 'Barrett College Fellows, Imaging Informatics (JLiang Lab)',
     dates: 'Sep 2025 – Dec 2025',
     description:
@@ -154,6 +180,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: 'Data & Finance Intern',
+    area: 'economics',
     org: 'GreenLight Solutions (sustainability nonprofit)',
     dates: 'Apr 2025 – Aug 2025',
     description:
@@ -161,6 +188,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: "Machine Learning Researcher, Alzheimer's Project",
+    area: 'data',
     org: 'The Data Mine, Purdue University · with SuperFluidDX',
     dates: 'Aug 2024 – Apr 2025',
     description:
@@ -168,6 +196,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: 'Research Assistant',
+    area: 'data',
     org: 'Science and Engineering Experience (SCENE), ASU',
     dates: 'Nov 2022 – Apr 2023',
     description:
@@ -291,9 +320,9 @@ export const education: TimelineEntry[] = [
 ];
 
 export const skills: Record<string, string[]> = {
-  Languages: ['Python', 'R', 'SQL', 'Java', 'HTML'],
-  'ML & data': ['PyTorch', 'TensorFlow / Keras', 'scikit-learn', 'pandas', 'NumPy', 'SciPy', 'NLP', 'Jupyter'],
-  'Analytics & tools': ['Excel', 'Alteryx', 'Tableau', 'Power BI', 'GitHub', 'Lucidchart'],
+  Languages: ['Python', 'R', 'SQL', 'TypeScript', 'Java', 'HTML'],
+  'ML & data': ['PyTorch', 'TensorFlow / Keras', 'scikit-learn', 'pandas', 'NumPy', 'SciPy', 'NLP', 'Jupyter', 'Event data modeling', 'Synthetic data'],
+  'Analytics & tools': ['SQLite', 'React', 'JSON Schema', 'Git', 'Excel', 'Alteryx', 'Tableau', 'Power BI', 'Lucidchart'],
 };
 
 // Headline numbers shown under the hero. Empty array hides the strip.
@@ -303,3 +332,28 @@ export const stats: { value: string; label: string }[] = [
   { value: '3,000+', label: 'SoDA members reached' },
   { value: 'Largest', label: 'mentorship cohort in SoDA history' },
 ];
+
+// Words for the chapter-style version of the site (/v2)
+export const chapters = {
+  build: {
+    question: 'What do you build?',
+    answer:
+      "Most of my work starts with a question that doesn't have an obvious answer. Right now that's Archie at ASU's Learning Engineering Institute, and before that I spent a few years on research that ranged from chest X-rays to Alzheimer's genetics.",
+  },
+  markets: {
+    question: 'Why economics?',
+    answer:
+      'I like figuring out why businesses and markets behave the way they do. Some of that turned into research tools, and some of it turned into a first-place pitch.',
+  },
+  lead: {
+    question: 'How do you lead?',
+    answer:
+      "I'm Co-President of ASU's Software Developers Association, where I started our mentorship program and the Women in Tech Conference at ASU. I like building the structures that help good ideas, and the people behind them, grow.",
+  },
+  how: { question: 'How do you approach a problem?' },
+  fun: { question: 'What do you do for fun?' },
+  contact: {
+    question: 'Want to talk?',
+    answer: "I'm always happy to talk shop, or to hear about a project you're working on.",
+  },
+};
