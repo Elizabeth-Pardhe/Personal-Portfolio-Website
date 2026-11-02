@@ -269,3 +269,11 @@ export const skills: Record<string, string[]> = {
   'ML & data': ['PyTorch', 'TensorFlow / Keras', 'scikit-learn', 'pandas', 'NumPy', 'SciPy', 'NLP', 'Jupyter'],
   'Analytics & tools': ['Excel', 'Alteryx', 'Tableau', 'Power BI', 'GitHub', 'Lucidchart'],
 };
+
+// Headline numbers shown under the hero. Empty array hides the strip.
+export const stats: { value: string; label: string }[] = [
+  { value: '88%', label: 'hit rate · Consensus Gap backtest' },
+  { value: '185', label: 'offline unit tests' },
+  { value: '9,000+', label: 'BTC observations modeled' },
+  { value: '3,000+', label: 'SoDA members served' },
+];
