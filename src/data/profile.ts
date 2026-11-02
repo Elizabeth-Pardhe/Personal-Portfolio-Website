@@ -8,7 +8,7 @@
 export const profile = {
   name: 'Elizabeth Pardhe',
   headline: 'Data Science & Economics · ASU Barrett Honors College',
-  intro: "I dig into messy data until it says something useful, and then I help people put it to work.",
+  intro: "I use data and economics to work through problems that don't have obvious answers, and then help people act on what we find.",
   // Shown as a small badge in the hero; '' hides it
   status: '',
   // "Currently" line in the hero
@@ -23,11 +23,11 @@ export const profile = {
 
 // "The short version": one idea that ties the work together, then how I work, each backed by real examples
 export const shortVersion = {
-  lead: "I study Data Science (with a math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next. I'm happiest with messy data and a question someone cares about in front of me. My projects have ranged from reading chest X-rays to tracking Bitcoin prices, and what ties them together is how much I love digging in until something useful shows up.",
+  lead: "I study Data Science (with a math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next. I like starting with a question that doesn't have an obvious answer and figuring out what the data can tell us. My projects have ranged from reading chest X-rays to tracking Bitcoin prices, but they all come down to digging into a problem until something useful shows up.",
   items: [
     {
       title: 'Start with the question',
-      text: "Before I touch a model, I want to know what we're trying to learn and why anyone should care. It's usually the hardest part, but it's the part I enjoy most!",
+      text: "Before I touch a model, I want to know what we're trying to learn and why anyone cares. It's usually the hardest part, but it's the part I enjoy most!",
     },
     {
       title: 'Separate signal from noise',
@@ -35,11 +35,11 @@ export const shortVersion = {
     },
     {
       title: 'Build things people use',
-      text: "A finding doesn't help anyone if it stays in a notebook. I like turning analysis into something people can pick up and use, like the dashboards I built for a nonprofit or the app concept that won our case competition.",
+      text: "I like turning analysis into something people can pick up and use, like the dashboards I built for a nonprofit or the app concept that won our case competition.",
     },
     {
       title: 'Bring people with me',
-      text: "As Co-President of ASU's Software Developers Association, I started our mentorship program and the Women in Tech Conference at ASU. I want more students to feel like they belong in tech.",
+      text: "As Co-President of ASU's Software Developers Association, I started our mentorship program and the Women in Tech Conference at ASU. I like building the structures that help good ideas, and the people behind them, grow.",
     },
     {
       title: 'Keep making things',
@@ -50,10 +50,8 @@ export const shortVersion = {
   ] as { title: string; text: string; linkLabel?: string; linkUrl?: string }[],
 };
 
-// Closing paragraph after "The short version"
-export const about = [
-  "I like taking something ambiguous and researching it until a direction becomes clear, then explaining what I found so anyone can follow along. That's why I keep gravitating toward work where the numbers and the business questions meet.",
-];
+// Optional closing paragraphs after "The short version" (empty hides them)
+export const about: string[] = [];
 
 export const links = {
   github: 'https://github.com/Elizabeth-Pardhe',
