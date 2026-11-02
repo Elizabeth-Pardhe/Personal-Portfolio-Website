@@ -133,23 +133,6 @@ const contacts = [
         )
       }
 
-      {
-        values.length > 0 && (
-          <section class="wrap values" aria-label="What I care about">
-            <p class="kicker">What I care about</p>
-            <div class="values-grid">
-              {values.map((v, i) => (
-                <div>
-                  <span class="vbar" data-i={i % 3} aria-hidden="true" />
-                  <h3>{v.title}</h3>
-                  <p>{v.text}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )
-      }
-
       <!-- About -->
       <section id="about" class="wrap sec">
         <div class="sec-head">
@@ -175,6 +158,22 @@ const contacts = [
                       </div>
                     ))}
                   </dl>
+                </div>
+              )
+            }
+            {
+              values.length > 0 && (
+                <div class="cares">
+                  <h3>What I care about</h3>
+                  <div class="cares-grid">
+                    {values.map((v, i) => (
+                      <div>
+                        <span class="vbar" data-i={i % 3} aria-hidden="true" />
+                        <h4>{v.title}</h4>
+                        <p>{v.text}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )
             }
@@ -636,19 +635,36 @@ const contacts = [
     color: var(--gold);
     margin-bottom: 2px;
   }
-  .values {
-    padding-top: 96px;
+  .cares {
+    margin-bottom: 36px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
   }
-  .values-grid {
+  .cares h3 {
+    font-size: 30px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cares-grid {
     display: grid;
-    gap: 36px;
-    margin-top: 28px;
+    gap: 28px;
   }
-  @media (min-width: 768px) {
-    .values-grid {
+  @media (min-width: 900px) {
+    .cares-grid {
       grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
+      gap: 32px;
     }
+  }
+  .cares h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .about-copy .cares p {
+    font-size: 15px;
+    margin-bottom: 0;
   }
   .vbar {
     display: block;
@@ -664,15 +680,6 @@ const contacts = [
   .vbar[data-i='2'] {
     background: var(--pink-fill);
     width: 54px;
-  }
-  .values h3 {
-    font-size: 28px;
-    line-height: 1.15;
-    margin-bottom: 10px;
-  }
-  .values p:not(.kicker) {
-    color: var(--muted);
-    font-size: 15px;
   }
   .personal {
     margin-top: 28px;
