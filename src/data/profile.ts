@@ -9,7 +9,7 @@ export const profile = {
   name: 'Elizabeth Pardhe',
   headline: 'Data Science & Economics · ASU Barrett Honors College',
   intro:
-    "I use data, economics and AI to understand what's really happening inside businesses and markets, then turn what I find into tools and decisions people can use.",
+    'I use data, economics and AI to turn messy, real-world information into clear signals people can trust, from hospital X-rays to company earnings.',
   // Shown as a small badge in the hero; '' hides it
   status: '',
   // "Currently" line in the hero
@@ -22,55 +22,38 @@ export const profile = {
   photoUrl: '/photo.jpg',
 };
 
-// "The short version": quick, scannable facts shown next to the photo
-export const highlights: { label: string; text: string }[] = [
-  {
-    label: 'Studying',
-    text: "Data Science (math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next",
-  },
-  {
-    label: 'Researching',
-    text: "AI for chest X-rays, polarizing speech in Congress, and Alzheimer's genetics, plus an AI internship at ASU",
-  },
-  {
-    label: 'Building',
-    text: 'Tools that turn public data, like company filings and news, into early signals about a business',
-  },
-  {
-    label: 'Leading',
-    text: "Co-President of ASU's Software Developers Association, where I started the mentorship program and co-hosted ASU's first Women in Tech Conference",
-  },
-  { label: 'Creating', text: 'Painting and photography whenever I get the chance' },
-];
-
-// Longer "About me" paragraphs shown after the highlights
-export const about = [
-  "I'm drawn to problems where the answer isn't obvious yet. I like taking something ambiguous, researching it until a direction becomes clear, and then explaining what I found in a way anyone can follow.",
-  "I'm comfortable with Python, statistics and machine learning, and the part I enjoy most is the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful? That's why I'm drawn to work that sits between data, economics and product.",
-  'Leadership has been just as big a part of college for me. I love building communities, from mentorship programs to alumni banquets, and working on teams with people from very different backgrounds.',
-];
-
-// A short personal note shown in the About section
-export const personal = {
-  text: "Outside of work I'm happiest making things. I paint, and I run a photography account where I share my favorite shots.",
-  linkLabel: '@elizabeths_studio',
-  linkUrl: 'https://www.instagram.com/elizabeths_studio/',
+// "The short version": one idea that ties the work together, then how I work, each backed by real examples
+export const shortVersion = {
+  lead: "I study Data Science (with a math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next. Whether the subject is health, politics, education or finance, my work comes back to one idea: turning messy, real-world information into signals people can trust and act on.",
+  items: [
+    {
+      title: 'Start with the question',
+      text: "Whether it is a chest X-ray, a speech in Congress or a company's earnings, I begin by asking what we are really trying to learn and why it matters.",
+    },
+    {
+      title: 'Separate signal from noise',
+      text: 'My research has dealt with medical images, political speech and genetic data, and my finance projects pull from filings, news and trading records. In each one the hard part is proving which patterns are real. That is why Consensus Gap only keeps a claim if its exact quote appears in the source.',
+    },
+    {
+      title: 'Build things people use',
+      text: 'A finding only matters if it helps someone decide something, so I turn analysis into tools: a research engine for investors, dashboards for a nonprofit, and a money-management app concept that won first place.',
+    },
+    {
+      title: 'Bring people with me',
+      text: "As Co-President of ASU's Software Developers Association, I started the mentorship program and co-planned ASU's first Women in Tech Conference to help more students find their place in tech.",
+    },
+    {
+      title: 'Keep making things',
+      text: 'Outside of work I paint and take photos, which I share at',
+      linkLabel: '@elizabeths_studio',
+      linkUrl: 'https://www.instagram.com/elizabeths_studio/',
+    },
+  ] as { title: string; text: string; linkLabel?: string; linkUrl?: string }[],
 };
 
-// Three short principles shown near the top of the page
-export const values: { title: string; text: string }[] = [
-  {
-    title: 'Start with the question',
-    text: 'Before writing any code, I want to know what we are trying to learn and why it matters.',
-  },
-  {
-    title: 'Build things people use',
-    text: 'An analysis or model is only worth it if it helps someone make a better decision.',
-  },
-  {
-    title: 'Bring people with me',
-    text: "I started SoDA's mentorship program and co-planned ASU's first Women in Tech Conference to help more students find their place in tech.",
-  },
+// Closing paragraphs after "The short version"
+export const about = [
+  'I like taking something ambiguous, researching it until a direction becomes clear, and then explaining what I found in a way anyone can follow. That is why my work keeps landing between data, economics and product: I want to understand what is happening, back it up with evidence, and turn it into something someone can use.',
 ];
 
 export const links = {

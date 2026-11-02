@@ -15,9 +15,7 @@ import {
   leadership,
   skills,
   stats,
-  values,
-  personal,
-  highlights,
+  shortVersion,
 } from '~/data/profile';
 
 const metadata = {
@@ -146,50 +144,30 @@ const contacts = [
             )
           }
           <div class="about-copy">
-            {
-              highlights.length > 0 && (
-                <div class="short">
-                  <h3>The short version</h3>
-                  <dl>
-                    {highlights.map((h, i) => (
-                      <div>
-                        <dt data-i={i % 3}>{h.label}</dt>
-                        <dd>{h.text}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              )
-            }
-            {
-              values.length > 0 && (
-                <div class="cares">
-                  <h3>What I care about</h3>
-                  <div class="cares-grid">
-                    {values.map((v, i) => (
-                      <div>
-                        <span class="vbar" data-i={i % 3} aria-hidden="true" />
-                        <h4>{v.title}</h4>
-                        <p>{v.text}</p>
-                      </div>
-                    ))}
+            <div class="short">
+              <h3>The short version</h3>
+              <p class="short-lead">{shortVersion.lead}</p>
+              <dl>
+                {shortVersion.items.map((it, i) => (
+                  <div>
+                    <dt>
+                      <span class="vbar" data-i={i % 3} aria-hidden="true" />
+                      {it.title}
+                    </dt>
+                    <dd>
+                      {it.text}
+                      {it.linkUrl && (
+                        <>
+                          {' '}
+                          <a href={it.linkUrl} target="_blank" rel="noopener">{it.linkLabel}</a>{'.'}
+                        </>
+                      )}
+                    </dd>
                   </div>
-                </div>
-              )
-            }
+                ))}
+              </dl>
+            </div>
             {about.map((p) => <p>{p}</p>)}
-            {
-              personal?.text && (
-                <p class="personal">
-                  {personal.text}{' '}
-                  {personal.linkUrl && (
-                    <a href={personal.linkUrl} target="_blank" rel="noopener">
-                      {personal.linkLabel}
-                    </a>
-                  )}
-                </p>
-              )
-            }
           </div>
         </div>
       </section>
@@ -635,37 +613,6 @@ const contacts = [
     color: var(--gold);
     margin-bottom: 2px;
   }
-  .cares {
-    margin-bottom: 36px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--line);
-  }
-  .cares h3 {
-    font-size: 30px;
-    line-height: 1.1;
-    margin-bottom: 20px;
-  }
-  .cares-grid {
-    display: grid;
-    gap: 28px;
-  }
-  @media (min-width: 900px) {
-    .cares-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-  }
-  .cares h4 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 23px;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-  .about-copy .cares p {
-    font-size: 15px;
-    margin-bottom: 0;
-  }
   .vbar {
     display: block;
     height: 4px;
@@ -680,15 +627,6 @@ const contacts = [
   .vbar[data-i='2'] {
     background: var(--pink-fill);
     width: 54px;
-  }
-  .personal {
-    margin-top: 28px;
-    padding-top: 22px;
-    border-top: 1px solid var(--line);
-  }
-  .personal a {
-    color: var(--pink);
-    border-bottom: 1px solid currentColor;
   }
   .note {
     margin-top: 12px;
@@ -875,43 +813,40 @@ const contacts = [
     line-height: 1.1;
     margin-bottom: 18px;
   }
+  .short-lead {
+    font-family: var(--serif);
+    font-size: 25px !important;
+    line-height: 1.4;
+    color: var(--ink) !important;
+    margin-bottom: 26px !important;
+  }
   .short dl > div {
     display: grid;
-    gap: 2px 24px;
-    padding: 12px 0;
+    gap: 6px 28px;
+    padding: 18px 0;
     border-top: 1px dashed var(--line);
   }
-  .short dl > div:first-child {
-    border-top: 0;
-  }
-  @media (min-width: 640px) {
+  @media (min-width: 720px) {
     .short dl > div {
-      grid-template-columns: 120px 1fr;
+      grid-template-columns: 210px 1fr;
     }
   }
   .short dt {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-    padding-top: 3px;
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
   }
-  .short dt[data-i='1'] {
-    color: var(--blue);
-  }
-  .short dt[data-i='2'] {
-    color: var(--pink);
+  .short dt .vbar {
+    margin-bottom: 10px;
   }
   .short dd {
-    color: var(--ink);
-    font-size: 16px;
+    color: var(--muted);
+    font-size: 15.5px;
   }
-  .about-copy > p:first-of-type {
-    font-family: var(--serif);
-    font-size: 26px;
-    line-height: 1.4;
-    color: var(--ink);
+  .short dd a {
+    color: var(--pink);
+    border-bottom: 1px solid currentColor;
   }
 
   /* Work */
