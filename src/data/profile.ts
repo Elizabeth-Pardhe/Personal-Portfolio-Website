@@ -35,7 +35,7 @@ export const shortVersion = {
     },
     {
       title: 'Build things people use',
-      text: "I like turning analysis into something people can pick up and use, like the testing setup I built at the Learning Engineering Institute so my team can check how an AI reading assistant behaves.",
+      text: "I like turning analysis into something people can pick up and use, like the data pipeline I built for Archie, an AI reading companion my team at the Learning Engineering Institute is using in its research.",
     },
     {
       title: 'Bring people with me',
@@ -72,6 +72,22 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: 'Archie',
+    subtitle: 'AI reading companion · ASU Learning Engineering Institute',
+    date: 'Fall 2026',
+    blurb:
+      "A research tool that studies whether AI help strengthens a student's thinking or replaces it. It pays attention to how someone reads and can offer a short prompt, and I built the part that captures and stores all of that reading activity.",
+    points: [
+      'Every move a reader makes, from a highlight to a long pause, gets saved with a timestamp and the exact paragraph it happened in.',
+      "Activity goes into a database for the research team, while each student's highlights and notes are saved as files they own and can open and edit themselves. I also built a developer view that traces any highlight from the database to its file.",
+      'Soft highlights are tracked without ever recording what the reader selected, and tracking only starts once someone shows that habit.',
+      'Before any real students used it, I tested the whole flow in a live browser with a synthetic dataset of 268 reading events, and I found and fixed two bugs that were overcounting reading time.',
+      "I merged a teammate's reading interface into the project, wrote the team's data guide, and presented the work at lab meetings.",
+    ],
+    tech: ['Python', 'SQLite', 'TypeScript', 'React', 'Synthetic data', 'Browser testing'],
+    note: 'Built with AI-assisted development',
+  },
   {
     title: 'Consensus Gap',
     subtitle: 'Longaeva AI Hack-a-Thon · Advanced to Stage 2',
@@ -136,7 +152,7 @@ export const experience: TimelineEntry[] = [
     org: 'ASU Learning Engineering Institute',
     dates: 'Fall 2026',
     description:
-      'Built a realistic practice dataset of how students use an AI reading assistant (268 simulated reading events across 4 readings), plus the system that records and checks that data, so the team can test the assistant reliably.',
+      "Built the data layer for Archie, a research project studying whether AI support strengthens a student's thinking or replaces it. My work covers how reading activity gets captured, stored and tested.",
   },
   {
     title: 'Machine Learning Researcher, C-SPAN Project',
@@ -291,9 +307,9 @@ export const education: TimelineEntry[] = [
 ];
 
 export const skills: Record<string, string[]> = {
-  Languages: ['Python', 'R', 'SQL', 'Java', 'HTML'],
-  'ML & data': ['PyTorch', 'TensorFlow / Keras', 'scikit-learn', 'pandas', 'NumPy', 'SciPy', 'NLP', 'Jupyter'],
-  'Analytics & tools': ['Excel', 'Alteryx', 'Tableau', 'Power BI', 'GitHub', 'Lucidchart'],
+  Languages: ['Python', 'R', 'SQL', 'TypeScript', 'Java', 'HTML'],
+  'ML & data': ['PyTorch', 'TensorFlow / Keras', 'scikit-learn', 'pandas', 'NumPy', 'SciPy', 'NLP', 'Jupyter', 'Event data modeling', 'Synthetic data'],
+  'Analytics & tools': ['SQLite', 'React', 'JSON Schema', 'Git', 'Excel', 'Alteryx', 'Tableau', 'Power BI', 'Lucidchart'],
 };
 
 // Headline numbers shown under the hero. Empty array hides the strip.
