@@ -87,13 +87,6 @@ export const experience: TimelineEntry[] = [
       'Built a seeded, reproducible synthetic learner dataset for an AI reading companion (268 behavioral events, 64 pipeline trace rows, versioned intervention policies) in a schema-constrained SQLite store, plus a tested telemetry pipeline and schema-checking ingestion writer.',
   },
   {
-    title: 'Undergraduate Researcher',
-    org: 'Barrett College Fellows — Imaging Informatics (JLiang Lab)',
-    dates: 'Sept 2025 – Dec 2025',
-    description:
-      'Built and compared PyTorch deep-learning pipelines (ConvNeXt, DINO-based models, U-Net, U-Net++) for chest X-ray analysis on CheXpert and Pneumothorax, and diagnosed training-instability issues to improve preprocessing and architecture selection.',
-  },
-  {
     title: 'Undergraduate ML Student Researcher — C-SPAN Research',
     org: 'The Data Mine, Purdue University',
     dates: 'Aug 2025 – Apr 2026',
@@ -101,18 +94,39 @@ export const experience: TimelineEntry[] = [
       'Researched multimodal sentiment analysis on congressional speech, evaluating BERT, wav2vec 2.0, and fusion techniques for detecting rhetorical polarization across text, audio, and video.',
   },
   {
-    title: 'Finance Intern',
-    org: 'Greenlight Solutions (sustainability nonprofit)',
-    dates: 'June 2025 – Aug 2025',
+    title: 'Undergraduate Researcher',
+    org: 'Barrett College Fellows — Imaging Informatics (JLiang Lab)',
+    dates: 'Sept 2025 – Dec 2025',
     description:
-      'Analyzed 5 years of donor, financial, and operational data to segment donors for targeted outreach, and automated monthly Excel reporting — cutting manual processing time by 40%.',
+      'Built and compared PyTorch deep-learning pipelines (ConvNeXt, DINO-based models, U-Net, U-Net++) for chest X-ray analysis on CheXpert and Pneumothorax, and diagnosed training-instability issues to improve preprocessing and architecture selection.',
+  },
+  {
+    title: 'Data & Finance Intern',
+    org: 'GreenLight Solutions (sustainability nonprofit)',
+    dates: 'Apr 2025 – Aug 2025',
+    description:
+      'Turned 5 years of financial and operational data into dashboards and impact reports, with fundraising recommendations to improve donor retention. Built Excel processes that standardized monthly reporting (cutting manual processing time 40%) and supported sponsorship proposals with quantitative analysis.',
   },
   {
     title: 'Undergraduate ML Student Researcher — TranslationalHDPM',
-    org: 'The Data Mine, Purdue University',
+    org: 'The Data Mine, Purdue University · with SuperFluidDX',
     dates: 'Aug 2024 – Apr 2025',
     description:
-      'Built reproducible pipelines for high-dimensional genomic and time-series data; Spearman correlation and PCA preprocessing contributed to a 5% model performance gain.',
+      "Partnered with SuperFluidDX, a molecular diagnostics company, on ML models analyzing RNA-based insights for Alzheimer's patients. Estimated measurement uncertainty via simulations of high-dimensional RNA-Seq in Python, R, and Excel; Spearman correlation and PCA preprocessing contributed to a 5% model performance gain.",
+  },
+  {
+    title: 'Developer (PAF 215 Project)',
+    org: 'Luke Air Force Base',
+    dates: 'Jan 2024 – May 2024',
+    description:
+      'Worked with airmen and 3 Air Force officials to build a course teaching Java, Python, and HTML so airmen could create apps and dashboards for the base; researched the problem with industry professionals and professors and designed a working task manager and dashboard.',
+  },
+  {
+    title: 'Research Assistant',
+    org: 'Science and Engineering Experience (SCENE) · ASU',
+    dates: 'Nov 2022 – Apr 2023',
+    description:
+      'Researched with Prof. Houlong Zhuang how to reduce hydrogen embrittlement in metals; presented at the Arizona Science and Engineering Fair.',
   },
 ];
 
@@ -217,6 +231,17 @@ export const leadership: LeadershipOrg[] = [
         title: 'Innovation Chair',
         dates: 'Sep 2023 – Present',
         points: ['Produced committee videos, flyers, and posters, and represented NGSC at ASU Change the World.'],
+      },
+    ],
+  },
+  {
+    org: 'Prompt Engineering Club at ASU (PECA)',
+    dates: 'Nov 2023 – Apr 2024',
+    roles: [
+      {
+        title: 'Technical & Marketing Officer',
+        dates: 'Nov 2023 – Apr 2024',
+        points: ['Managed the club Instagram, created flyers and presentations, planned events, and grew membership through outreach.'],
       },
     ],
   },
