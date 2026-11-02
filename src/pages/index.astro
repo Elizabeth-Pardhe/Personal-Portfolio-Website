@@ -178,10 +178,14 @@ const contacts = [
           <span class="num">ii.</span>
           <h2>Selected work</h2>
         </div>
+        <span id="economics" class="econ-anchor" aria-hidden="true"></span>
+        <p class="econ-note">
+          Showing my markets and money work. <a href="#work">Show everything</a>
+        </p>
         <ol class="work">
           {
             projects.map((p, i) => (
-              <li class="work-row">
+              <li class="work-row" data-area={p.area}>
                 <span class="work-n">{roman(i)}.</span>
                 <div class="work-body">
                   <h3>
@@ -902,6 +906,36 @@ const contacts = [
     color: var(--blue);
     border: 1px solid color-mix(in srgb, var(--blue-fill) 45%, transparent);
     padding: 3px 9px;
+  }
+
+  /* Economics view: tapping the blue bar highlights markets & money projects */
+  .econ-anchor {
+    display: block;
+    position: relative;
+    top: -120px;
+  }
+  .econ-note {
+    display: none;
+    margin-top: 18px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--blue-fill);
+    background: color-mix(in srgb, var(--blue-fill) 8%, transparent);
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .econ-note a {
+    color: var(--blue);
+    border-bottom: 1px solid currentColor;
+    margin-left: 6px;
+  }
+  .econ-anchor:target ~ .econ-note {
+    display: block;
+  }
+  .work-row {
+    transition: opacity 0.3s;
+  }
+  .econ-anchor:target ~ .work .work-row:not([data-area='economics']) {
+    display: none;
   }
 
   /* Timeline */

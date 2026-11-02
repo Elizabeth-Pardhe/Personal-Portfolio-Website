@@ -69,11 +69,13 @@ export interface Project {
   tech: string[];
   href?: string; // live demo or repo
   note?: string; // small note under the tags, e.g. "Demo available on request"
+  area?: 'data' | 'economics' | 'people'; // which bar of the E this belongs to
 }
 
 export const projects: Project[] = [
   {
     title: 'Archie',
+    area: 'data',
     subtitle: 'AI reading companion · ASU Learning Engineering Institute',
     date: 'Fall 2026',
     blurb:
@@ -90,6 +92,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Consensus Gap',
+    area: 'economics',
     subtitle: 'Longaeva AI Hack-a-Thon · Advanced to Stage 2',
     blurb:
       "A research tool that reads a company's public filings, economic data and news coverage to spot early signs that its business is changing, before the next earnings report confirms it.",
@@ -103,6 +106,7 @@ export const projects: Project[] = [
   },
   {
     title: "How Buying Pressure Moves Bitcoin's Price",
+    area: 'economics',
     subtitle: 'Market microstructure study',
     date: 'Spring 2026',
     blurb:
@@ -115,6 +119,7 @@ export const projects: Project[] = [
   },
   {
     title: 'QuantumConnect',
+    area: 'economics',
     subtitle: '1st Place · AKPsi × Investment and Finance Association AI Case Competition',
     blurb:
       'With a team of four, I pitched an app that helps everyday people manage their money and gives an investment firm a new way to reach clients. We won first place.',
@@ -127,6 +132,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Coding Course for Airmen at Luke Air Force Base',
+    area: 'data',
     subtitle: 'PAF 215 Project · Developer',
     date: 'Jan 2024 – May 2024',
     blurb: 'A beginner coding course that teaches airmen to build their own apps and dashboards for the base.',
