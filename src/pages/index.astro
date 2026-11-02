@@ -17,6 +17,7 @@ import {
   stats,
   values,
   personal,
+  highlights,
 } from '~/data/profile';
 
 const metadata = {
@@ -153,7 +154,7 @@ const contacts = [
       <section id="about" class="wrap sec">
         <div class="sec-head">
           <span class="num">i.</span>
-          <h2>About</h2>
+          <h2>About me</h2>
         </div>
         <div class="about">
           {
@@ -161,7 +162,22 @@ const contacts = [
               <img src={profile.photoUrl} alt={profile.name} width="200" height="200" loading="lazy" class="portrait" />
             )
           }
-          <div class="prose">
+          <div class="about-copy">
+            {
+              highlights.length > 0 && (
+                <div class="short">
+                  <h3>The short version</h3>
+                  <dl>
+                    {highlights.map((h, i) => (
+                      <div>
+                        <dt data-i={i % 3}>{h.label}</dt>
+                        <dd>{h.text}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )
+            }
             {about.map((p) => <p>{p}</p>)}
             {
               personal?.text && (
@@ -836,13 +852,55 @@ const contacts = [
       height: 200px;
     }
   }
-  .prose p {
+  .about-copy p {
     font-size: 17px;
     color: var(--muted);
     margin-bottom: 18px;
     max-width: 40em;
   }
-  .prose p:first-child {
+  .short {
+    margin-bottom: 36px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .short h3 {
+    font-size: 30px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .short dl > div {
+    display: grid;
+    gap: 2px 24px;
+    padding: 12px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .short dl > div:first-child {
+    border-top: 0;
+  }
+  @media (min-width: 640px) {
+    .short dl > div {
+      grid-template-columns: 120px 1fr;
+    }
+  }
+  .short dt {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 3px;
+  }
+  .short dt[data-i='1'] {
+    color: var(--blue);
+  }
+  .short dt[data-i='2'] {
+    color: var(--pink);
+  }
+  .short dd {
+    color: var(--ink);
+    font-size: 16px;
+  }
+  .about-copy > p:first-of-type {
     font-family: var(--serif);
     font-size: 26px;
     line-height: 1.4;

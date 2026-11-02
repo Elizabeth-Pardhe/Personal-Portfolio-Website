@@ -22,10 +22,32 @@ export const profile = {
   photoUrl: '/photo.jpg',
 };
 
+// "The short version": quick, scannable facts shown next to the photo
+export const highlights: { label: string; text: string }[] = [
+  {
+    label: 'Studying',
+    text: "Data Science (math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next",
+  },
+  {
+    label: 'Researching',
+    text: "AI for chest X-rays, polarizing speech in Congress, and Alzheimer's genetics, plus an AI internship at ASU",
+  },
+  {
+    label: 'Building',
+    text: 'Tools that turn public data, like company filings and news, into early signals about a business',
+  },
+  {
+    label: 'Leading',
+    text: "Co-President of ASU's Software Developers Association, where I started the mentorship program and co-hosted ASU's first Women in Tech Conference",
+  },
+  { label: 'Creating', text: 'Painting and photography whenever I get the chance' },
+];
+
+// Longer "About me" paragraphs shown after the highlights
 export const about = [
-  "I'm a senior at Arizona State University's Barrett, The Honors College, studying Data Science (with a focus in mathematics) and Economics, and I'm continuing into a master's in Data Science. I'm most interested in where technology, economics and research meet, especially when data and AI can help solve a real business problem.",
-  "My work so far ranges from training AI models to read chest X-rays, to studying how trading activity moves Bitcoin's price, to building a tool that scans company filings and news for early signs of change. I'm comfortable with Python, statistics and machine learning, and the part I enjoy most is the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful?",
-  "Leadership has been just as big a part of college for me. I co-lead ASU's Software Developers Association, where I started the club's mentorship program and helped host ASU's first Women in Tech Conference.",
+  "I'm drawn to problems where the answer isn't obvious yet. I like taking something ambiguous, researching it until a direction becomes clear, and then explaining what I found in a way anyone can follow.",
+  "I'm comfortable with Python, statistics and machine learning, and the part I enjoy most is the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful? That's why I'm drawn to work that sits between data, economics and product.",
+  'Leadership has been just as big a part of college for me. I love building communities, from mentorship programs to alumni banquets, and working on teams with people from very different backgrounds.',
 ];
 
 // A short personal note shown in the About section
