@@ -42,10 +42,10 @@ const bars = [
 
 const toc = [
   { id: 'hello', label: 'Hello' },
+  { id: 'how', label: chapters.how.question },
   { id: 'build', label: chapters.build.question },
   { id: 'markets', label: chapters.markets.question },
   { id: 'lead', label: chapters.lead.question },
-  { id: 'how', label: chapters.how.question },
   { id: 'fun', label: chapters.fun.question },
   { id: 'contact', label: chapters.contact.question },
 ];
@@ -93,7 +93,18 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
       <!-- Sticky E (desktop) -->
       <aside class="rail">
         <div class="ebox">
-          <svg viewBox="0 0 410 300" role="img" aria-label="The E in Elizabeth as a bar chart. Each bar jumps to a chapter.">
+          <svg viewBox="0 0 410 316" role="img" aria-label="The E in Elizabeth as a bar chart. Each bar jumps to a chapter.">
+            <g class="axis">
+              <line x1="54" y1="16" x2="54" y2="284"></line>
+              <line x1="139" y1="16" x2="139" y2="284"></line>
+              <line x1="224" y1="16" x2="224" y2="284"></line>
+              <line x1="309" y1="16" x2="309" y2="284"></line>
+              <text x="54" y="304">0</text>
+              <text x="139" y="304">25</text>
+              <text x="224" y="304">50</text>
+              <text x="309" y="304">75</text>
+              <text x="394" y="304">100</text>
+            </g>
             <rect x="28" y="24" width="26" height="252" fill="#f4efe6"></rect>
             {
               bars.map((b, i) => (
@@ -110,7 +121,9 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
             }
           </svg>
         </div>
-        <p class="hint">Tap a bar to jump there</p>
+        <p class="hint">
+          <em>Fig. 1.</em> Elizabeth, by experience. n = 1, self-reported. Tap a bar to explore.
+        </p>
         <ol class="toc">
           {
             toc.map((t) => (
@@ -148,9 +161,45 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
           <p class="scroll-cue">Scroll, or tap a bar of the E ↓</p>
         </section>
 
+        <!-- How I work -->
+        <section id="how" class="chapter" data-area="">
+          <p class="kicker">Chapter i · How I work</p>
+          <h2>{chapters.how.question}</h2>
+          <div class="how">
+            {
+              howItems.map((it, i) => (
+                <div class="how-item" style={`--c:${['var(--gold)', 'var(--blue)', 'var(--pink)'][i % 3]}`}>
+                  <span class="bar" />
+                  <h3>{it.title}</h3>
+                  <p>{it.text}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="toolkit">
+            {
+              Object.entries(skills).map(([group, list]) => (
+                <div>
+                  <h4>{group}</h4>
+                  <p>{list.join(' · ')}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="edu">
+            {
+              education.map((e) => (
+                <p>
+                  <b>{e.title}</b>, {e.org} <span>{e.dates}</span>
+                </p>
+              ))
+            }
+          </div>
+        </section>
+
         <!-- Data -->
         <section id="build" class="chapter" data-area="data">
-          <p class="kicker" style="--c:var(--gold-ink)">Chapter i · Data</p>
+          <p class="kicker" style="--c:var(--gold-ink)">Chapter ii · Data</p>
           <h2>{chapters.build.question}</h2>
           <div class="bubble">
             <p>{chapters.build.answer}</p>
@@ -192,7 +241,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
 
         <!-- Economics -->
         <section id="markets" class="chapter" data-area="economics">
-          <p class="kicker" style="--c:var(--blue)">Chapter ii · Economics</p>
+          <p class="kicker" style="--c:var(--blue)">Chapter iii · Economics</p>
           <h2>{chapters.markets.question}</h2>
           <div class="bubble">
             <p>{chapters.markets.answer}</p>
@@ -234,7 +283,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
 
         <!-- People -->
         <section id="lead" class="chapter" data-area="people">
-          <p class="kicker" style="--c:var(--pink-ink)">Chapter iii · People</p>
+          <p class="kicker" style="--c:var(--pink-ink)">Chapter iv · People</p>
           <h2>{chapters.lead.question}</h2>
           <div class="bubble">
             <p>{chapters.lead.answer}</p>
@@ -269,42 +318,6 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
                 ))
               }
             </div>
-          </div>
-        </section>
-
-        <!-- How I work -->
-        <section id="how" class="chapter" data-area="">
-          <p class="kicker">Chapter iv · How I work</p>
-          <h2>{chapters.how.question}</h2>
-          <div class="how">
-            {
-              howItems.map((it, i) => (
-                <div class="how-item" style={`--c:${['var(--gold)', 'var(--blue)', 'var(--pink)'][i % 3]}`}>
-                  <span class="bar" />
-                  <h3>{it.title}</h3>
-                  <p>{it.text}</p>
-                </div>
-              ))
-            }
-          </div>
-          <div class="toolkit">
-            {
-              Object.entries(skills).map(([group, list]) => (
-                <div>
-                  <h4>{group}</h4>
-                  <p>{list.join(' · ')}</p>
-                </div>
-              ))
-            }
-          </div>
-          <div class="edu">
-            {
-              education.map((e) => (
-                <p>
-                  <b>{e.title}</b>, {e.org} <span>{e.dates}</span>
-                </p>
-              ))
-            }
           </div>
         </section>
 
@@ -507,11 +520,27 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
   .v2[data-active='people'] .ebox .bar[data-area='people'] rect {
     transform: scaleX(1.06);
   }
+  .ebox .axis line {
+    stroke: rgba(244, 239, 230, 0.1);
+  }
+  .ebox .axis text {
+    font-family: var(--mono);
+    font-size: 10px;
+    fill: rgba(244, 239, 230, 0.45);
+    text-anchor: middle;
+  }
   .hint {
     margin-top: 10px;
     font-family: var(--mono);
     font-size: 11px;
+    line-height: 1.6;
     color: var(--dim);
+  }
+  .hint em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold-ink);
   }
   .toc {
     margin-top: 22px;
