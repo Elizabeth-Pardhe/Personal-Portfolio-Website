@@ -9,7 +9,11 @@ export const profile = {
   name: 'Elizabeth Pardhe',
   headline: 'Data Science & Economics · ASU Barrett Honors College',
   intro:
-    'I combine quantitative analysis, AI, research, and product thinking to turn ambiguous problems into practical solutions.',
+    'I use data, economics and AI to turn messy, real-world information into clear signals people can trust, from hospital X-rays to company earnings.',
+  // Shown as a small badge in the hero; '' hides it
+  status: '',
+  // "Currently" line in the hero
+  now: ['AI Intern, ASU Learning Engineering Institute', 'Co-President, Software Developers Association'],
   // Optional; '' hides it
   location: 'Phoenix, AZ',
   // Put a résumé PDF at public/resume.pdf and set this to '/resume.pdf'; '' hides the button
@@ -18,17 +22,45 @@ export const profile = {
   photoUrl: '/photo.jpg',
 };
 
+// "The short version": one idea that ties the work together, then how I work, each backed by real examples
+export const shortVersion = {
+  lead: "I study Data Science (with a math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next. Whether the subject is health, politics, education or finance, my work comes back to one idea: turning messy, real-world information into signals people can trust and act on.",
+  items: [
+    {
+      title: 'Start with the question',
+      text: "Whether it is a chest X-ray, a speech in Congress or a company's earnings, I begin by asking what we are really trying to learn and why it matters.",
+    },
+    {
+      title: 'Separate signal from noise',
+      text: 'My research has dealt with medical images, political speech and genetic data, and my finance projects pull from filings, news and trading records. In each one the hard part is proving which patterns are real. That is why Consensus Gap only keeps a claim if its exact quote appears in the source.',
+    },
+    {
+      title: 'Build things people use',
+      text: 'A finding only matters if it helps someone decide something, so I turn analysis into tools: a research engine for investors, dashboards for a nonprofit, and a money-management app concept that won first place.',
+    },
+    {
+      title: 'Bring people with me',
+      text: "As Co-President of ASU's Software Developers Association, I started the mentorship program and co-planned ASU's first Women in Tech Conference to help more students find their place in tech.",
+    },
+    {
+      title: 'Keep making things',
+      text: 'Outside of work I paint and take photos, which I share at',
+      linkLabel: '@elizabeths_studio',
+      linkUrl: 'https://www.instagram.com/elizabeths_studio/',
+    },
+  ] as { title: string; text: string; linkLabel?: string; linkUrl?: string }[],
+};
+
+// Closing paragraphs after "The short version"
 export const about = [
-  "I'm a senior at Arizona State University's Barrett, The Honors College, studying Data Science (with a focus in mathematics) and Economics, and I'm continuing into a master's in Data Science. I'm most interested in where technology, economics, research and product thinking meet, especially when data and AI can solve real business problems.",
-  "My projects range from studying how trading activity moves Bitcoin's price, to training AI models to read chest X-rays, to building a tool that scans company filings and news for early signs of change. I'm comfortable with Python, statistics and machine learning, but the part I enjoy most is the question behind the code: what are we trying to learn, why does it matter, and how can we turn it into something useful?",
-  "Leadership has been a big part of college for me. I co-lead ASU's Software Developers Association, serve as president of Devil Data Science, started SoDA's mentorship program, and helped host ASU's first Women in Tech Conference. I like taking a messy problem, researching it, choosing a direction and explaining the result clearly.",
-  "I'm looking for roles in data science, analytics, product and research where I can build and test things myself, think strategically, and own problems from start to finish.",
+  'I like taking something ambiguous, researching it until a direction becomes clear, and then explaining what I found in a way anyone can follow. That is why my work keeps landing between data, economics and product: I want to understand what is happening, back it up with evidence, and turn it into something someone can use.',
 ];
 
 export const links = {
   github: 'https://github.com/Elizabeth-Pardhe',
   linkedin: 'https://www.linkedin.com/in/elizabeth-pardhe/',
   email: 'elizabethdpardhe@gmail.com',
+  instagram: 'https://www.instagram.com/elizabeths_studio/',
 };
 
 export interface Project {
@@ -39,6 +71,7 @@ export interface Project {
   points: string[];
   tech: string[];
   href?: string; // live demo or repo
+  note?: string; // small note under the tags, e.g. "Demo available on request"
 }
 
 export const projects: Project[] = [
@@ -53,6 +86,7 @@ export const projects: Project[] = [
       "It weighs each piece of evidence and combines it into one overall read on the company, with 185 automated tests checking the logic. I tested it on 27 past earnings reports using only the information available at the time.",
     ],
     tech: ['Python', 'SEC filings', 'Economic data (FRED)', 'News data (GDELT)', 'LLMs', 'Bayesian statistics'],
+    note: 'Demo available on request',
   },
   {
     title: "How Buying Pressure Moves Bitcoin's Price",
@@ -67,14 +101,16 @@ export const projects: Project[] = [
     tech: ['Python', 'pandas', 'Statistics', 'Regression'],
   },
   {
-    title: 'Quantumvest Fintech Proposal',
+    title: 'QuantumConnect',
     subtitle: '1st Place · AKPsi × Investment and Finance Association AI Case Competition',
     blurb:
-      "Won first place by pitching an interactive financial analysis web app designed around the needs of an investment advisory firm's clients.",
+      'With a team of four, I pitched an app that helps everyday people manage their money and gives an investment firm a new way to reach clients. We won first place.',
     points: [
-      'Researched the client needs of Quantumvest, a leading investment advisory firm, and presented the solution through a working web app.',
+      'Our client, Quantumvest, is an investment advisory firm. Since 65% of people say they feel uncertain about their finances and most look for information on their phones, we designed an app that meets people there.',
+      'The free version lets anyone track income and investments in one place, follow market news, learn investing basics and ask an AI chatbot questions. A premium tier adds AI-guided portfolio management, 24/7 access to a human advisor and loyalty perks.',
+      'We showed how the app would bring in younger and first-time investors and keep current clients engaged, and planned for risks such as outages that could shake client trust.',
     ],
-    tech: ['Web app', 'Financial analysis', 'AI'],
+    tech: ['Product strategy', 'Fintech', 'AI', 'Market research'],
   },
   {
     title: 'Coding Course for Airmen at Luke Air Force Base',
@@ -115,7 +151,7 @@ export const experience: TimelineEntry[] = [
   {
     title: 'Undergraduate Researcher',
     org: 'Barrett College Fellows, Imaging Informatics (JLiang Lab)',
-    dates: 'Sept 2025 – Dec 2025',
+    dates: 'Sep 2025 – Dec 2025',
     description:
       'Trained and compared AI models that read chest X-rays to find problems such as a collapsed lung, and worked out why some models struggled to train so the process could be improved.',
   },
@@ -160,7 +196,7 @@ export const leadership: LeadershipOrg[] = [
   {
     org: 'Software Developers Association (SoDA) at ASU',
     dates: 'Nov 2023 – Present',
-    summary: 'Grew club engagement 75% through 10+ career events for 3,000+ members.',
+    summary: "Started the club's mentorship program, co-planned ASU's first Women in Tech Conference, and grew engagement 75% across 3,000+ members.",
     roles: [
       { title: 'Co-President', dates: 'May 2026 – Present' },
       {
@@ -194,26 +230,9 @@ export const leadership: LeadershipOrg[] = [
     ],
   },
   {
-    org: 'Devil Data Science',
-    dates: 'Jan 2024 – Present',
-    roles: [
-      { title: 'President', dates: 'May 2026 – Present' },
-      {
-        title: 'Secretary',
-        dates: 'Apr 2024 – Apr 2026',
-        points: ['Organized workshops and meetings connecting students with recruiters and technical skills beyond class projects.'],
-      },
-      {
-        title: 'Director of Communications',
-        dates: 'Jan 2024 – Apr 2024',
-        points: ['Designed event flyers, moderated online events, and led outreach at university events.'],
-      },
-    ],
-  },
-  {
     org: 'Alpha Kappa Psi, Iota Xi Chapter',
     dates: 'Apr 2024 – Present',
-    summary: '1st place, AKPsi × Investment and Finance Association AI Case Competition.',
+    summary: 'Won 1st place in the AKPsi × Investment and Finance Association AI Case Competition and rebuilt the chapter website.',
     roles: [
       {
         title: 'Director of Information Technology',
@@ -232,7 +251,7 @@ export const leadership: LeadershipOrg[] = [
   {
     org: 'ASU Next Generation Service Corps',
     dates: 'Sep 2023 – Present',
-    summary: 'Planned 23 career events for 500+ students and 30 community partners.',
+    summary: 'Lead a climate and energy sustainability team, and planned 23 career events for 500+ students and 30 community partners.',
     roles: [
       {
         title: 'Mission Team Lead, MT 24: Energy & Climate Sustainability',
@@ -249,6 +268,7 @@ export const leadership: LeadershipOrg[] = [
   {
     org: 'Prompt Engineering Club at ASU (PECA)',
     dates: 'Nov 2023 – Apr 2024',
+    summary: 'Ran marketing and outreach to grow the club in its early days.',
     roles: [
       {
         title: 'Technical & Marketing Officer',
@@ -282,7 +302,7 @@ export const skills: Record<string, string[]> = {
 // Headline numbers shown under the hero. Empty array hides the strip.
 export const stats: { value: string; label: string }[] = [
   { value: '1st', label: 'place, AI case competition' },
-  { value: '185', label: 'automated tests in Consensus Gap' },
-  { value: '9,000+', label: 'Bitcoin trading records analyzed' },
+  { value: '6', label: 'research & industry roles' },
   { value: '3,000+', label: 'SoDA members reached' },
+  { value: 'Largest', label: 'mentorship cohort in SoDA history' },
 ];

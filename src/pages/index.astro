@@ -15,6 +15,7 @@ import {
   leadership,
   skills,
   stats,
+  shortVersion,
 } from '~/data/profile';
 
 const metadata = {
@@ -41,6 +42,7 @@ const contacts = [
   links.email && { label: links.email, href: `mailto:${links.email}` },
   links.linkedin && { label: 'LinkedIn', href: links.linkedin },
   links.github && { label: 'GitHub', href: links.github },
+  links.instagram && { label: 'Photography', href: links.instagram },
 ].filter(Boolean) as { label: string; href: string }[];
 ---
 
@@ -82,11 +84,27 @@ const contacts = [
       <!-- Hero -->
       <section class="hero wrap">
         <div class="hero-text">
+          {
+            profile.status && (
+              <p class="status">
+                <i aria-hidden="true"></i>
+                {profile.status}
+              </p>
+            )
+          }
           <p class="kicker">Data Science &amp; Economics · ASU Barrett</p>
           <h1>
             {first} <em>{last}</em>
           </h1>
           <p class="lede">{profile.intro}</p>
+          {
+            profile.now?.length > 0 && (
+              <p class="now">
+                <span>Currently</span>
+                {profile.now.join(' · ')}
+              </p>
+            )
+          }
           <div class="cta">
             <a class="btn-gold" href="#work">Selected work</a>
             <a class="btn-line" href="#contact">Get in touch</a>
@@ -117,7 +135,7 @@ const contacts = [
       <section id="about" class="wrap sec">
         <div class="sec-head">
           <span class="num">i.</span>
-          <h2>About</h2>
+          <h2>About me</h2>
         </div>
         <div class="about">
           {
@@ -125,7 +143,30 @@ const contacts = [
               <img src={profile.photoUrl} alt={profile.name} width="200" height="200" loading="lazy" class="portrait" />
             )
           }
-          <div class="prose">
+          <div class="about-copy">
+            <div class="short">
+              <h3>The short version</h3>
+              <p class="short-lead">{shortVersion.lead}</p>
+              <dl>
+                {shortVersion.items.map((it, i) => (
+                  <div>
+                    <dt>
+                      <span class="vbar" data-i={i % 3} aria-hidden="true" />
+                      {it.title}
+                    </dt>
+                    <dd>
+                      {it.text}
+                      {it.linkUrl && (
+                        <>
+                          {' '}
+                          <a href={it.linkUrl} target="_blank" rel="noopener">{it.linkLabel}</a>{'.'}
+                        </>
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
             {about.map((p) => <p>{p}</p>)}
           </div>
         </div>
@@ -167,6 +208,7 @@ const contacts = [
                       <li>{t}</li>
                     ))}
                   </ul>
+                  {p.note && <p class="note">{p.note}</p>}
                 </div>
               </li>
             ))
@@ -232,22 +274,23 @@ const contacts = [
                     <span class="date">{o.dates}</span>
                   </header>
                   {o.summary && <p class="summary">{o.summary}</p>}
-                  <ol>
+                  <ol class="roles">
                     {o.roles.map((r) => (
                       <li>
-                        <p class="role">
-                          {r.title} <span class="date">{r.dates}</span>
-                        </p>
-                        {r.points && (
-                          <ul class="points">
-                            {r.points.map((pt) => (
-                              <li>{pt}</li>
-                            ))}
-                          </ul>
-                        )}
+                        <span class="role">{r.title}</span> <span class="date">{r.dates}</span>
                       </li>
                     ))}
                   </ol>
+                  {o.roles.some((r) => r.points?.length) && (
+                    <details>
+                      <summary>What I did</summary>
+                      <ul class="points">
+                        {o.roles.flatMap((r) => r.points ?? []).map((pt) => (
+                          <li>{pt}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
                 </article>
               ))}
             </div>
@@ -278,7 +321,7 @@ const contacts = [
         <p class="kicker">vi. Contact</p>
         <h2>Let's <em>talk.</em></h2>
         <p class="lede">
-          I'm open to data science, analytics, product and research opportunities. I'd love to hear from you.
+          I'm always happy to talk about data, economics, research or product, or about a project you're working on.
         </p>
         <div class="contact-links">
           {
@@ -537,6 +580,91 @@ const contacts = [
     color: var(--pink);
     border-color: var(--pink);
   }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .status i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pink-fill);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--pink-fill) 25%, transparent);
+  }
+  .now {
+    margin-top: 22px;
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 36em;
+  }
+  .now span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+  .vbar {
+    display: block;
+    height: 4px;
+    width: 64px;
+    margin-bottom: 18px;
+    background: var(--gold-fill);
+  }
+  .vbar[data-i='1'] {
+    background: var(--blue-fill);
+    width: 44px;
+  }
+  .vbar[data-i='2'] {
+    background: var(--pink-fill);
+    width: 54px;
+  }
+  .note {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .roles {
+    margin-top: 14px;
+  }
+  .roles li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 12px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  details {
+    margin-top: 14px;
+  }
+  details summary {
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    list-style: none;
+  }
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  details summary::after {
+    content: ' +';
+  }
+  details[open] summary::after {
+    content: ' −';
+  }
   .loc {
     margin-top: 28px;
     font-family: var(--mono);
@@ -669,17 +797,56 @@ const contacts = [
       height: 200px;
     }
   }
-  .prose p {
+  .about-copy p {
     font-size: 17px;
     color: var(--muted);
     margin-bottom: 18px;
     max-width: 40em;
   }
-  .prose p:first-child {
+  .short {
+    margin-bottom: 36px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .short h3 {
+    font-size: 30px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .short-lead {
     font-family: var(--serif);
-    font-size: 26px;
+    font-size: 25px !important;
     line-height: 1.4;
+    color: var(--ink) !important;
+    margin-bottom: 26px !important;
+  }
+  .short dl > div {
+    display: grid;
+    gap: 6px 28px;
+    padding: 18px 0;
+    border-top: 1px dashed var(--line);
+  }
+  @media (min-width: 720px) {
+    .short dl > div {
+      grid-template-columns: 210px 1fr;
+    }
+  }
+  .short dt {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.2;
     color: var(--ink);
+  }
+  .short dt .vbar {
+    margin-bottom: 10px;
+  }
+  .short dd {
+    color: var(--muted);
+    font-size: 15.5px;
+  }
+  .short dd a {
+    color: var(--pink);
+    border-bottom: 1px solid currentColor;
   }
 
   /* Work */
@@ -795,21 +962,11 @@ const contacts = [
     color: var(--pink);
     font-size: 14px;
   }
-  .lead ol {
-    margin-top: 16px;
-    border-left: 1px solid color-mix(in srgb, var(--blue-fill) 55%, transparent);
-    padding-left: 18px;
-  }
-  .lead ol > li + li {
-    margin-top: 14px;
-  }
+
   .role {
     font-weight: 500;
   }
-  .role .date {
-    margin-left: 6px;
-    font-weight: 400;
-  }
+
   .lead .points {
     margin-top: 6px;
     font-size: 14px;
