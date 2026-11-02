@@ -149,12 +149,14 @@ export interface TimelineEntry {
   org: string;
   dates?: string;
   description?: string;
+  area?: 'data' | 'economics' | 'people';
 }
 
 // Empty array hides the section.
 export const experience: TimelineEntry[] = [
   {
     title: 'AI Intern',
+    area: 'data',
     org: 'ASU Learning Engineering Institute',
     dates: 'Fall 2026',
     description:
@@ -162,6 +164,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: 'Machine Learning Researcher, C-SPAN Project',
+    area: 'data',
     org: 'The Data Mine, Purdue University',
     dates: 'Aug 2025 – Apr 2026',
     description:
@@ -169,6 +172,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: 'Undergraduate Researcher',
+    area: 'data',
     org: 'Barrett College Fellows, Imaging Informatics (JLiang Lab)',
     dates: 'Sep 2025 – Dec 2025',
     description:
@@ -176,6 +180,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: 'Data & Finance Intern',
+    area: 'economics',
     org: 'GreenLight Solutions (sustainability nonprofit)',
     dates: 'Apr 2025 – Aug 2025',
     description:
@@ -183,6 +188,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: "Machine Learning Researcher, Alzheimer's Project",
+    area: 'data',
     org: 'The Data Mine, Purdue University · with SuperFluidDX',
     dates: 'Aug 2024 – Apr 2025',
     description:
@@ -190,6 +196,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     title: 'Research Assistant',
+    area: 'data',
     org: 'Science and Engineering Experience (SCENE), ASU',
     dates: 'Nov 2022 – Apr 2023',
     description:
@@ -325,3 +332,28 @@ export const stats: { value: string; label: string }[] = [
   { value: '3,000+', label: 'SoDA members reached' },
   { value: 'Largest', label: 'mentorship cohort in SoDA history' },
 ];
+
+// Words for the chapter-style version of the site (/v2)
+export const chapters = {
+  build: {
+    question: 'What do you build?',
+    answer:
+      "Most of my work starts with a question that doesn't have an obvious answer. Right now that's Archie at ASU's Learning Engineering Institute, and before that I spent a few years on research that ranged from chest X-rays to Alzheimer's genetics.",
+  },
+  markets: {
+    question: 'Why economics?',
+    answer:
+      'I like figuring out why businesses and markets behave the way they do. Some of that turned into research tools, and some of it turned into a first-place pitch.',
+  },
+  lead: {
+    question: 'How do you lead?',
+    answer:
+      "I'm Co-President of ASU's Software Developers Association, where I started our mentorship program and the Women in Tech Conference at ASU. I like building the structures that help good ideas, and the people behind them, grow.",
+  },
+  how: { question: 'How do you approach a problem?' },
+  fun: { question: 'What do you do for fun?' },
+  contact: {
+    question: 'Want to talk?',
+    answer: "I'm always happy to talk shop, or to hear about a project you're working on.",
+  },
+};
