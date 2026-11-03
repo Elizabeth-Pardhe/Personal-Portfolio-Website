@@ -8,7 +8,7 @@
 export const profile = {
   name: 'Elizabeth Pardhe',
   headline: 'Data Science & Economics · ASU Barrett Honors College',
-  intro: "I use data and economics to work through problems that don't have obvious answers, and then help people act on what we find.",
+  intro: 'I turn messy data into decisions people can act on.',
   // Shown as a small badge in the hero; '' hides it
   status: '',
   // "Currently" line in the hero
@@ -70,66 +70,59 @@ export interface Project {
   href?: string; // live demo or repo
   note?: string; // small note under the tags, e.g. "Demo available on request"
   area?: 'data' | 'economics' | 'people'; // which bar of the E this belongs to
+  roles?: string; // short role tag, e.g. 'Data · Product'
 }
 
 export const projects: Project[] = [
   {
     title: 'ARCHIE',
     area: 'data',
+    roles: 'Data · Product',
     subtitle: 'AI reading companion · ASU Learning Engineering Institute',
     date: 'Fall 2026',
-    blurb:
-      "A research project at ASU's Learning Engineering Institute exploring how AI can support students while they read. I built the data side of the system.",
+    blurb: "A research project at ASU's Learning Engineering Institute exploring how AI can support students while they read.",
     points: [
-      'Designed how reading activity gets captured and stored, with student privacy in mind and with students keeping ownership of their own notes.',
-      'Tested the whole system with synthetic data before any real students used it, and tracked down and fixed bugs along the way.',
+      'The research team needed reading data they could trust, without collecting more than they needed, and I owned the data side of the system.',
+      'I designed the data structure and the privacy rules, then directed AI coding tools to build it, reviewing and correcting the code at each step.',
+      'Before any students used it, I tested everything end to end with synthetic data and caught bugs that would have skewed the research.',
     ],
     tech: ['Python', 'SQLite', 'TypeScript', 'React', 'Synthetic data', 'Browser testing'],
-    note: 'Built with AI-assisted development',
-  },
-  {
-    title: 'Consensus Gap',
-    area: 'economics',
-    subtitle: 'Longaeva AI Hack-a-Thon · Advanced to Stage 2',
-    blurb:
-      "A research tool that reads a company's public filings, economic data and news coverage to spot early signs that its business is changing, before the next earnings report confirms it.",
-    points: [
-      'Focused on Applied Materials, which makes the machines used to manufacture computer chips. I identified the numbers that best show how its business is doing, then tested whether alternative data (public information from outside the company, such as economic indicators and news) could show changes in those numbers sooner.',
-      'The tool uses AI to pull specific claims out of SEC filings, government economic data and global news, and only keeps a claim if its exact quote appears in the original source.',
-      "It weighs each piece of evidence and combines it into one overall read on the company, with 185 automated tests checking the logic. I tested it on 27 past earnings reports using only the information available at the time.",
-    ],
-    tech: ['Python', 'SEC filings', 'Economic data (FRED)', 'News data (GDELT)', 'LLMs', 'Bayesian statistics'],
-    note: 'Demo available on request',
-  },
-  {
-    title: "How Buying Pressure Moves Bitcoin's Price",
-    area: 'economics',
-    subtitle: 'Market microstructure study',
-    date: 'Spring 2026',
-    blurb:
-      "A study of whether the balance of buyers and sellers in Bitcoin over short windows explains where its price goes, and whether it can predict the next move.",
-    points: [
-      'Collected 9,000+ short-interval Bitcoin trading records and removed the long stretches with no trading, so the analysis only counted real activity.',
-      "Found that buying and selling pressure explains about 5% of short-term price movement but does little to predict the next move, which is what you'd expect in a market this heavily traded.",
-    ],
-    tech: ['Python', 'pandas', 'Statistics', 'Regression'],
   },
   {
     title: 'QuantumConnect',
     area: 'economics',
+    roles: 'Product · Strategy',
     subtitle: '1st Place · AKPsi × Investment and Finance Association AI Case Competition',
     blurb:
-      'With a team of four, I pitched an app that helps everyday people manage their money and gives an investment firm a new way to reach clients. We won first place.',
+      'With a team of four, I pitched an app that helps everyday people manage their money and gives an investment firm a new way to reach clients. The app itself stole the show, and we took first place.',
     points: [
-      'Our client, Quantumvest, is an investment advisory firm. Since 65% of people say they feel uncertain about their finances and most look for information on their phones, we designed an app that meets people there.',
+      'Our client, Quantumvest, is an investment advisory firm. Since 65% of people say they feel uncertain about their finances (MarketWatch) and most look for information on their phones, we designed an app that meets people there.',
       'The free version lets anyone track income and investments in one place, follow market news, learn investing basics and ask an AI chatbot questions. A premium tier adds AI-guided portfolio management, 24/7 access to a human advisor and loyalty perks.',
       'We showed how the app would bring in younger and first-time investors and keep current clients engaged, and planned for risks such as outages that could shake client trust.',
     ],
-    tech: ['Product strategy', 'Fintech', 'AI', 'Market research'],
+    tech: ['Product design', 'Fintech', 'AI', 'Market research'],
+  },
+  {
+    title: 'Consensus Gap',
+    area: 'economics',
+    roles: 'Economics · Data',
+    subtitle: 'Research engine · Longaeva AI Hack-a-Thon, advanced to Stage 2',
+    blurb:
+      'An evidence-weighing tool that checks whether public information is running ahead of or behind what a company has told the market.',
+    points: [
+      "It reads public filings and market data for semiconductor companies, scores how much each piece of evidence deserves to be trusted, and compares the overall direction with the company's own guidance. The result is a read of ahead, behind or consistent, with a confidence level and the evidence behind it. It makes no price target and no trading call.",
+      'It gives live reads on real SEC filings for TSMC, Micron and Intel, and I replayed 27 past earnings dates using only what was public at each date.',
+      "On 8 positions it hit 88%, next to a 93% always-long base rate. That tells me the method runs cleanly on real filings. It doesn't prove skill yet, and I say so on the page.",
+      'It has 24 synthetic test scenarios and 185 automated tests that all run offline, and the web app loads in about 2 seconds.',
+      'My biggest lessons were that a result only means something next to its baseline, and that a verified quote can still carry the wrong number. I found and fixed a case where one did.',
+    ],
+    tech: ['Python', 'SEC EDGAR / XBRL', 'LLM-assisted extraction', 'Vercel'],
+    note: 'Demo available on request',
   },
   {
     title: 'Coding Course for Airmen at Luke Air Force Base',
     area: 'data',
+    roles: 'Product · Teaching',
     subtitle: 'PAF 215 Project · Developer',
     date: 'Jan 2024 – May 2024',
     blurb: 'A beginner coding course that teaches airmen to build their own apps and dashboards for the base.',
@@ -138,6 +131,18 @@ export const projects: Project[] = [
       'Talked with industry professionals and professors to understand the problem, then designed a task manager and a dashboard and presented them to the Air Force officials.',
     ],
     tech: ['Java', 'Python', 'HTML', 'Teaching', 'UI design'],
+  },
+  {
+    title: "How Buying Pressure Moves Bitcoin's Price",
+    area: 'economics',
+    roles: 'Economics',
+    subtitle: 'Market microstructure study',
+    date: 'Spring 2026',
+    blurb: "A study of whether the balance of buyers and sellers in Bitcoin explains where its price goes next.",
+    points: [
+      'Buying and selling pressure explained about 5% of short-term price moves across 9,000+ trading records, but did little to predict the next move.',
+    ],
+    tech: ['Python', 'pandas', 'Regression'],
   },
 ];
 
@@ -165,7 +170,7 @@ export const experience: TimelineEntry[] = [
     org: 'The Data Mine, Purdue University',
     dates: 'Aug 2025 – Apr 2026',
     description:
-      'Studied how combining what members of Congress say, how they sound and how they look on video helps AI detect polarizing speech, using language and speech models such as BERT and wav2vec 2.0.',
+      'Our team built models to detect polarizing rhetoric in 10,400 House floor speeches from 2017 to 2022. Text alone worked best (80% accuracy) compared with audio (62%) and video (59%), and our topic modeling showed the gap between Democratic and Republican speech grew over time. A model combining all three is in progress.',
   },
   {
     title: 'Undergraduate Researcher',
@@ -181,7 +186,7 @@ export const experience: TimelineEntry[] = [
     org: 'GreenLight Solutions (sustainability nonprofit)',
     dates: 'Apr 2025 – Aug 2025',
     description:
-      'Turned 5 years of financial data into impact reports, recommended ways to keep donors giving, and automated monthly Excel reporting, cutting the time it took by 40%.',
+      "Automated the nonprofit's monthly finance reporting with Excel and Google Sheets formulas, cutting manual work by 40%. Turned 5 years of financial and operational data into impact reports, backed its sponsorship proposals with analysis, and helped refresh its website.",
   },
   {
     title: "Machine Learning Researcher, Alzheimer's Project",
@@ -189,7 +194,7 @@ export const experience: TimelineEntry[] = [
     org: 'The Data Mine, Purdue University · with SuperFluidDX',
     dates: 'Aug 2024 – Apr 2025',
     description:
-      "Worked with SuperFluidDX, a diagnostics company, on models that use genetic (RNA) data to study Alzheimer's patients. Cleaned and combined large genetic datasets and simplified them in ways that improved model performance by 5%.",
+      "Our team worked with SuperFluidDX on blood-based RNA data from 234 people. Instead of compressing all 534 genes, which overfit, we kept only the most connected 'hub' genes. That cut the data to 7 features while keeping 84% accuracy (AUC 0.92) with no overfitting.",
   },
   {
     title: 'Research Assistant',
@@ -219,7 +224,7 @@ export const leadership: LeadershipOrg[] = [
   {
     org: 'Software Developers Association (SoDA) at ASU',
     dates: 'Nov 2023 – Present',
-    summary: "Started the club's mentorship program and grew engagement 75% across 3,000+ members.",
+    summary: "Started the club's mentorship program, which grew from a first cohort of 20 to the largest in the club's history, and grew engagement 75% across 3,000+ members.",
     roles: [
       { title: 'Co-President', dates: 'May 2026 – Present' },
       {
@@ -288,18 +293,6 @@ export const leadership: LeadershipOrg[] = [
       },
     ],
   },
-  {
-    org: 'Prompt Engineering Club at ASU (PECA)',
-    dates: 'Nov 2023 – Apr 2024',
-    summary: 'Ran marketing and outreach to grow the club in its early days.',
-    roles: [
-      {
-        title: 'Technical & Marketing Officer',
-        dates: 'Nov 2023 – Apr 2024',
-        points: ['Managed the club Instagram, created flyers and presentations, planned events, and grew membership through outreach.'],
-      },
-    ],
-  },
 ];
 
 export const education: TimelineEntry[] = [
@@ -317,9 +310,9 @@ export const education: TimelineEntry[] = [
 ];
 
 export const skills: Record<string, string[]> = {
-  Languages: ['Python', 'R', 'SQL', 'TypeScript', 'Java', 'HTML'],
-  'ML & data': ['PyTorch', 'TensorFlow / Keras', 'scikit-learn', 'pandas', 'NumPy', 'SciPy', 'NLP', 'Jupyter', 'Event data modeling', 'Synthetic data'],
-  'Analytics & tools': ['SQLite', 'React', 'JSON Schema', 'Git', 'Excel', 'Alteryx', 'Tableau', 'Power BI', 'Lucidchart'],
+  Languages: ['Python', 'R', 'SQL', 'TypeScript', 'Java'],
+  'ML & data': ['PyTorch', 'scikit-learn', 'pandas', 'NumPy', 'NLP (BERT, wav2vec 2.0)', 'Synthetic data'],
+  'Tools': ['SQLite', 'React', 'Git', 'Excel & Google Sheets', 'JSON Schema'],
 };
 
 // Headline numbers shown under the hero. Empty array hides the strip.
@@ -335,12 +328,12 @@ export const chapters = {
   build: {
     question: 'What do you build?',
     answer:
-      "Most of my work starts with a question that doesn't have an obvious answer. Right now that's ARCHIE at ASU's Learning Engineering Institute, and before that I spent a few years on research that ranged from chest X-rays to Alzheimer's genetics.",
+      "Right now I'm building the data side of ARCHIE at ASU's Learning Engineering Institute. Before that, I spent a few years on research that ranged from chest X-rays to Alzheimer's genetics.",
   },
   markets: {
     question: 'Why economics?',
     answer:
-      'I like figuring out why businesses and markets behave the way they do. Some of that turned into research tools, and some of it turned into a first-place pitch.',
+      'I like figuring out why businesses and markets behave the way they do. Some of that turned into a first-place pitch, and some of it turned into a research engine.',
   },
   lead: {
     question: 'How do you lead?',
@@ -354,3 +347,7 @@ export const chapters = {
     answer: "I'm always happy to talk shop, or to hear about a project you're working on.",
   },
 };
+
+// Instagram post links for the "fun" chapter (open a post, tap ... then Copy link).
+// Leave empty to show a tappable preview card for the account instead.
+export const instagramPosts: string[] = [];

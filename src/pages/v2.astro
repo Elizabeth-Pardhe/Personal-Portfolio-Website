@@ -18,6 +18,7 @@ import {
   skills,
   shortVersion,
   chapters,
+  instagramPosts,
 } from '~/data/profile';
 
 const metadata = {
@@ -29,6 +30,8 @@ const metadata = {
 
 const dataProjects = projects.filter((p) => p.area === 'data');
 const econProjects = projects.filter((p) => p.area === 'economics');
+const econLead = econProjects.filter((p) => !p.title.includes('Bitcoin'));
+const econTail = econProjects.filter((p) => p.title.includes('Bitcoin'));
 const dataRoles = experience.filter((e) => e.area === 'data' && e.title !== 'AI Intern');
 const econRoles = experience.filter((e) => e.area === 'economics');
 const howItems = shortVersion.items.filter((it) => !it.linkUrl && it.title !== 'Bring people with me');
@@ -42,12 +45,12 @@ const bars = [
 
 const toc = [
   { id: 'hello', label: 'Hello' },
-  { id: 'how', label: chapters.how.question },
-  { id: 'build', label: chapters.build.question },
-  { id: 'markets', label: chapters.markets.question },
-  { id: 'lead', label: chapters.lead.question },
-  { id: 'fun', label: chapters.fun.question },
-  { id: 'contact', label: chapters.contact.question },
+  { id: 'how', label: 'How I work' },
+  { id: 'build', label: 'Projects & research' },
+  { id: 'markets', label: 'Economics & strategy' },
+  { id: 'lead', label: 'Leadership' },
+  { id: 'fun', label: 'Off the clock' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 const contacts = [
@@ -93,18 +96,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
       <!-- Sticky E (desktop) -->
       <aside class="rail">
         <div class="ebox">
-          <svg viewBox="0 0 410 316" role="img" aria-label="The E in Elizabeth as a bar chart. Each bar jumps to a chapter.">
-            <g class="axis">
-              <line x1="54" y1="16" x2="54" y2="284"></line>
-              <line x1="139" y1="16" x2="139" y2="284"></line>
-              <line x1="224" y1="16" x2="224" y2="284"></line>
-              <line x1="309" y1="16" x2="309" y2="284"></line>
-              <text x="54" y="304">0</text>
-              <text x="139" y="304">25</text>
-              <text x="224" y="304">50</text>
-              <text x="309" y="304">75</text>
-              <text x="394" y="304">100</text>
-            </g>
+          <svg viewBox="0 0 410 300" role="img" aria-label="The E in Elizabeth as a bar chart. Each bar jumps to a chapter.">
             <rect x="28" y="24" width="26" height="252" fill="#f4efe6"></rect>
             {
               bars.map((b, i) => (
@@ -122,7 +114,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
           </svg>
         </div>
         <p class="hint">
-          <em>Fig. 1.</em> Elizabeth, by experience. n = 1, self-reported. Tap a bar to explore.
+          <em>Fig. 1.</em> Elizabeth, in three parts. Tap a bar to explore.
         </p>
         <ol class="toc">
           {
@@ -199,7 +191,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
 
         <!-- Data -->
         <section id="build" class="chapter" data-area="data">
-          <p class="kicker" style="--c:var(--gold-ink)">Chapter ii · Data</p>
+          <p class="kicker" style="--c:var(--gold-ink)">Chapter ii · Projects &amp; research</p>
           <h2>{chapters.build.question}</h2>
           <div class="bubble">
             <p>{chapters.build.answer}</p>
@@ -209,6 +201,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
                   <details class="card" style={`--c:${areaColor.data}`}>
                     <summary>
                       <span class="t">{p.title}</span>
+                      {p.roles && <span class="role-tag">{p.roles}</span>}
                       <span class="m">{[p.subtitle, p.date].filter(Boolean).join(' · ')}</span>
                       <span class="b">{p.blurb}</span>
                       <span class="more">More</span>
@@ -223,16 +216,14 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
                   </details>
                 ))
               }
+              <p class="subhead">Technical depth</p>
               {
                 dataRoles.map((e) => (
-                  <details class="card" style={`--c:${areaColor.data}`}>
-                    <summary>
-                      <span class="t">{e.title}</span>
-                      <span class="m">{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
-                      <span class="more">More</span>
-                    </summary>
+                  <div class="card plain" style={`--c:${areaColor.data}`}>
+                    <span class="t">{e.title}</span>
+                    <span class="m">{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
                     <p class="desc">{e.description}</p>
-                  </details>
+                  </div>
                 ))
               }
             </div>
@@ -241,16 +232,17 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
 
         <!-- Economics -->
         <section id="markets" class="chapter" data-area="economics">
-          <p class="kicker" style="--c:var(--blue)">Chapter iii · Economics</p>
+          <p class="kicker" style="--c:var(--blue)">Chapter iii · Economics &amp; strategy</p>
           <h2>{chapters.markets.question}</h2>
           <div class="bubble">
             <p>{chapters.markets.answer}</p>
             <div class="cards">
               {
-                econProjects.map((p) => (
+                econLead.map((p) => (
                   <details class="card" style={`--c:${areaColor.economics}`}>
                     <summary>
                       <span class="t">{p.title}</span>
+                      {p.roles && <span class="role-tag">{p.roles}</span>}
                       <span class="m">{[p.subtitle, p.date].filter(Boolean).join(' · ')}</span>
                       <span class="b">{p.blurb}</span>
                       <span class="more">More</span>
@@ -267,13 +259,30 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
               }
               {
                 econRoles.map((e) => (
+                  <div class="card plain" style={`--c:${areaColor.economics}`}>
+                    <span class="t">{e.title}</span>
+                    <span class="m">{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
+                    <p class="desc">{e.description}</p>
+                  </div>
+                ))
+              }
+              {
+                econTail.map((p) => (
                   <details class="card" style={`--c:${areaColor.economics}`}>
                     <summary>
-                      <span class="t">{e.title}</span>
-                      <span class="m">{[e.org, e.dates].filter(Boolean).join(' · ')}</span>
+                      <span class="t">{p.title}</span>
+                      {p.roles && <span class="role-tag">{p.roles}</span>}
+                      <span class="m">{[p.subtitle, p.date].filter(Boolean).join(' · ')}</span>
+                      <span class="b">{p.blurb}</span>
                       <span class="more">More</span>
                     </summary>
-                    <p class="desc">{e.description}</p>
+                    <ul class="pts">
+                      {p.points.map((pt) => (
+                        <li>{pt}</li>
+                      ))}
+                    </ul>
+                    <p class="tags">{p.tech.join(' · ')}</p>
+                    {p.note && <p class="note">{p.note}</p>}
                   </details>
                 ))
               }
@@ -283,7 +292,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
 
         <!-- People -->
         <section id="lead" class="chapter" data-area="people">
-          <p class="kicker" style="--c:var(--pink-ink)">Chapter iv · People</p>
+          <p class="kicker" style="--c:var(--pink-ink)">Chapter iv · Leadership</p>
           <h2>{chapters.lead.question}</h2>
           <div class="bubble">
             <p>{chapters.lead.answer}</p>
@@ -335,6 +344,34 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
               </div>
             )
           }
+          {
+            instagramPosts.length > 0 ? (
+              <div class="ig-grid">
+                {instagramPosts.map((url) => (
+                  <blockquote class="instagram-media" data-instgrm-permalink={url} data-instgrm-version="14">
+                    <a href={url} target="_blank" rel="noopener">
+                      View this post on Instagram
+                    </a>
+                  </blockquote>
+                ))}
+              </div>
+            ) : (
+              links.instagram && (
+                <a class="ig-card" href={links.instagram} target="_blank" rel="noopener">
+                  <span class="ig-tiles" aria-hidden="true">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                  </span>
+                  <span class="ig-text">
+                    <b>@elizabeths_studio</b>
+                    <span>Photography and painting · Tap to see the gallery on Instagram →</span>
+                  </span>
+                </a>
+              )
+            )
+          }
+          {instagramPosts.length > 0 && <script is:inline async src="https://www.instagram.com/embed.js"></script>}
         </section>
 
         <!-- Contact -->
@@ -519,15 +556,6 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
   .v2[data-active='economics'] .ebox .bar[data-area='economics'] rect,
   .v2[data-active='people'] .ebox .bar[data-area='people'] rect {
     transform: scaleX(1.06);
-  }
-  .ebox .axis line {
-    stroke: rgba(244, 239, 230, 0.1);
-  }
-  .ebox .axis text {
-    font-family: var(--mono);
-    font-size: 10px;
-    fill: rgba(244, 239, 230, 0.45);
-    text-anchor: middle;
   }
   .hint {
     margin-top: 10px;
@@ -775,6 +803,13 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
     font-size: 11px;
     color: var(--dim);
   }
+  .card.plain {
+    display: grid;
+    gap: 2px;
+  }
+  .card.plain .desc {
+    margin-top: 6px;
+  }
   .card .desc {
     margin-top: 10px;
     font-size: 15px;
@@ -796,6 +831,85 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
     font-family: var(--mono);
     font-size: 11px;
     color: var(--dim);
+  }
+
+  .role-tag {
+    justify-self: start;
+    margin-bottom: 4px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--c) 18%, #fff);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .subhead {
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .ig-grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  @media (min-width: 700px) {
+    .ig-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .ig-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 16px;
+    padding: 14px 18px 14px 14px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1.5px solid transparent;
+    background-image: linear-gradient(#fff, #fff), linear-gradient(120deg, var(--gold), var(--pink), var(--blue));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .ig-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(60, 45, 20, 0.1);
+  }
+  .ig-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 34px);
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .ig-tiles i {
+    height: 34px;
+    border-radius: 6px;
+  }
+  .ig-tiles i:nth-child(1) {
+    background: linear-gradient(135deg, #f6e3c4, var(--gold));
+  }
+  .ig-tiles i:nth-child(2) {
+    background: linear-gradient(135deg, #fbe3ee, var(--pink));
+  }
+  .ig-tiles i:nth-child(3) {
+    background: linear-gradient(135deg, #dfe6fb, var(--blue));
+  }
+  .ig-text {
+    display: grid;
+  }
+  .ig-text b {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+  }
+  .ig-text span {
+    font-size: 14px;
+    color: var(--muted);
   }
 
   /* How I work */
