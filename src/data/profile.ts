@@ -8,7 +8,10 @@
 export const profile = {
   name: 'Elizabeth Pardhe',
   headline: 'Data Science & Economics · ASU Barrett Honors College',
-  intro: 'I turn messy data into decisions people can act on.',
+  intro:
+    "I'm a senior at Barrett, The Honors College at ASU, double majoring in Data Science (with a concentration in math) and Economics, with a minor in Business and a Cross-Sector Leadership Certificate. Next up is a master's in Data Science.",
+  // Short one-liner used for search results and link previews
+  tagline: 'I turn messy data into decisions people can act on.',
   // Shown as a small badge in the hero; '' hides it
   status: '',
   // "Currently" line in the hero
@@ -23,7 +26,7 @@ export const profile = {
 
 // "The short version": one idea that ties the work together, then how I work, each backed by real examples
 export const shortVersion = {
-  lead: "I study Data Science (with a math focus) and Economics at ASU's Barrett Honors College, with a master's in Data Science next. I like starting with a question that doesn't have an obvious answer and figuring out what the data can tell us. My projects have ranged from reading chest X-rays to tracking Bitcoin prices, but they all come down to digging into a problem until something useful shows up.",
+  lead: "I like starting with a question that doesn't have an obvious answer and figuring out what the data can tell us. My projects have ranged from reading chest X-rays to tracking Bitcoin prices, but they all come down to digging into a problem until something useful shows up.",
   items: [
     {
       title: 'Start with the question',
