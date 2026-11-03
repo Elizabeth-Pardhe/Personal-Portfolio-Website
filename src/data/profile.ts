@@ -43,7 +43,7 @@ export const shortVersion = {
     },
     {
       title: 'Keep making things',
-      text: "When I'm not working with data, I'm usually painting or out taking photos. I post my favorite shots on",
+      text: "When I'm not working with data, I'm usually painting or behind a camera, shooting grad photos and scenes around campus and the city. I post my favorite shots on",
       linkLabel: '@elizabeths_studio',
       linkUrl: 'https://www.instagram.com/elizabeths_studio/',
     },
@@ -350,4 +350,8 @@ export const chapters = {
 
 // Instagram post links for the "fun" chapter (open a post, tap ... then Copy link).
 // Leave empty to show a tappable preview card for the account instead.
-export const instagramPosts: string[] = [];
+export const instagramPosts: { url: string; label: string }[] = [
+  { url: 'https://www.instagram.com/p/DXVo9iEFJ8T/', label: 'Grad shoot' },
+  { url: 'https://www.instagram.com/p/DPYbTb6gGxv/', label: 'Cityscapes' },
+  { url: 'https://www.instagram.com/reel/DYgCk6OCSHE/', label: 'Grad photo reel' },
+];
