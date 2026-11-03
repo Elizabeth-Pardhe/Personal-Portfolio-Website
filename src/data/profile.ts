@@ -264,7 +264,7 @@ export const leadership: LeadershipOrg[] = [
     roles: [
       {
         title: 'Director of Information Technology',
-        dates: 'Jan 2026 – Present',
+        dates: 'Jan 2026 – May 2026',
         points: [
           'Revamped the chapter website with member profiles, headshots, and LinkedIns; kept recruitment info current and helped run internal elections.',
         ],
@@ -354,8 +354,8 @@ export const chapters = {
 
 // Instagram post links for the "fun" chapter (open a post, tap ... then Copy link).
 // Leave empty to show a tappable preview card for the account instead.
-export const instagramPosts: { url: string; title: string; caption: string }[] = [
-  { url: 'https://www.instagram.com/p/DXVo9iEFJ8T/', title: 'The Grad Edit', caption: 'Portraits for graduating seniors' },
-  { url: 'https://www.instagram.com/p/DPYbTb6gGxv/', title: 'City Frames', caption: 'Streets and skylines through my lens' },
-  { url: 'https://www.instagram.com/reel/DYgCk6OCSHE/', title: 'Grad Season in Motion', caption: 'The grad shoots, as a short reel' },
+export const instagramPosts: { url: string; title: string; caption: string; image?: string }[] = [
+  { url: 'https://www.instagram.com/p/DXVo9iEFJ8T/', title: 'The Grad Edit', caption: 'Portraits for graduating seniors', image: '/shots/grad-edit.jpg' },
+  { url: 'https://www.instagram.com/p/DPYbTb6gGxv/', title: 'City Frames', caption: 'Streets and skylines through my lens', image: '/shots/city-frames.jpg' },
+  { url: 'https://www.instagram.com/reel/DYgCk6OCSHE/', title: 'Grad Season in Motion', caption: 'The grad shoots, as a short reel', image: '/shots/grad-season.jpg' },
 ];
