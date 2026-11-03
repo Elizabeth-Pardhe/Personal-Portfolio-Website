@@ -341,7 +341,11 @@ export const chapters = {
       "I'm Co-President of ASU's Software Developers Association, where I started our mentorship program and the Women in Tech Conference at ASU. I like building the structures that help good ideas, and the people behind them, grow.",
   },
   how: { question: 'How do you approach a problem?' },
-  fun: { question: 'What do you do for fun?' },
+  fun: {
+    question: 'What do you do for fun?',
+    answer:
+      "When I'm not working with data, I'm usually painting or behind a camera. Most of my photography is grad portraits and the corners of campus and the city that catch my eye.",
+  },
   contact: {
     question: 'Want to talk?',
     answer: "I'm always happy to talk shop, or to hear about a project you're working on.",
@@ -350,8 +354,8 @@ export const chapters = {
 
 // Instagram post links for the "fun" chapter (open a post, tap ... then Copy link).
 // Leave empty to show a tappable preview card for the account instead.
-export const instagramPosts: { url: string; label: string }[] = [
-  { url: 'https://www.instagram.com/p/DXVo9iEFJ8T/', label: 'Grad shoot' },
-  { url: 'https://www.instagram.com/p/DPYbTb6gGxv/', label: 'Cityscapes' },
-  { url: 'https://www.instagram.com/reel/DYgCk6OCSHE/', label: 'Grad photo reel' },
+export const instagramPosts: { url: string; title: string; caption: string }[] = [
+  { url: 'https://www.instagram.com/p/DXVo9iEFJ8T/', title: 'The Grad Edit', caption: 'Portraits for graduating seniors' },
+  { url: 'https://www.instagram.com/p/DPYbTb6gGxv/', title: 'City Frames', caption: 'Streets and skylines through my lens' },
+  { url: 'https://www.instagram.com/reel/DYgCk6OCSHE/', title: 'Grad Season in Motion', caption: 'The grad shoots, as a short reel' },
 ];

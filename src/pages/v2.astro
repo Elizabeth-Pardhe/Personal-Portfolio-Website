@@ -35,7 +35,6 @@ const econTail = econProjects.filter((p) => p.title.includes('Bitcoin'));
 const dataRoles = experience.filter((e) => e.area === 'data' && e.title !== 'AI Intern');
 const econRoles = experience.filter((e) => e.area === 'economics');
 const howItems = shortVersion.items.filter((it) => !it.linkUrl && it.title !== 'Bring people with me');
-const funItem = shortVersion.items.find((it) => it.linkUrl);
 
 const bars = [
   { area: 'data', label: 'data', href: '#build', width: 250, color: 'var(--gold)', text: '#1b1d1c' },
@@ -334,45 +333,50 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
         <section id="fun" class="chapter" data-area="">
           <p class="kicker">Chapter v · Off the clock</p>
           <h2>{chapters.fun.question}</h2>
-          {
-            funItem && (
-              <div class="bubble">
-                <p>
-                  {funItem.text}{' '}
-                  <a class="ink" href={funItem.linkUrl} target="_blank" rel="noopener">{funItem.linkLabel}</a>{'.'}
-                </p>
-              </div>
-            )
-          }
+          <div class="bubble">
+            <p>{chapters.fun.answer}</p>
+          </div>
           {
             instagramPosts.length > 0 && (
-              <div class="ig-grid" aria-label="Recent photography on Instagram">
-                {instagramPosts.map((post) => (
-                  <blockquote class="instagram-media" data-instgrm-permalink={post.url} data-instgrm-version="14">
-                    <a href={post.url} target="_blank" rel="noopener">
-                      <b>{post.label}</b> · View on Instagram →
-                    </a>
-                  </blockquote>
+              <div class="shots">
+                {instagramPosts.map((post, i) => (
+                  <a class="shot" href={post.url} target="_blank" rel="noopener" style={`--c:${['var(--gold)', 'var(--pink)', 'var(--blue)'][i % 3]}`}>
+                    <span class="shot-art" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="26" height="26">
+                        {post.url.includes('/reel/') ? (
+                          <path d="M8 5.5v13l10.5-6.5z" fill="currentColor" />
+                        ) : (
+                          <>
+                            <rect x="3" y="6.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+                            <circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6" />
+                            <path d="M8.5 6.5 10 4h4l1.5 2.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                          </>
+                        )}
+                      </svg>
+                    </span>
+                    <span class="shot-title">{post.title}</span>
+                    <span class="shot-cap">{post.caption}</span>
+                    <span class="shot-go">Open on Instagram ↗</span>
+                  </a>
                 ))}
               </div>
             )
           }
           {
             links.instagram && (
-                <a class="ig-card" href={links.instagram} target="_blank" rel="noopener">
-                  <span class="ig-tiles" aria-hidden="true">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                  </span>
-                  <span class="ig-text">
-                    <b>@elizabeths_studio</b>
-                    <span>Photography and painting · Tap to see the gallery on Instagram →</span>
-                  </span>
-                </a>
+              <a class="ig-card" href={links.instagram} target="_blank" rel="noopener">
+                <span class="ig-tiles" aria-hidden="true">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </span>
+                <span class="ig-text">
+                  <b>@elizabeths_studio</b>
+                  <span>See the full gallery on Instagram →</span>
+                </span>
+              </a>
             )
           }
-          {instagramPosts.length > 0 && <script is:inline async src="https://www.instagram.com/embed.js"></script>}
         </section>
 
         <!-- Contact -->
@@ -633,7 +637,7 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
 
   /* Chapters */
   .chapter {
-    padding: 24px 0 96px;
+    padding: 24px 0 72px;
     scroll-margin-top: 64px;
   }
   @media (min-width: 900px) {
@@ -853,34 +857,63 @@ const areaColor = { data: 'var(--gold)', economics: 'var(--blue)', people: 'var(
     text-transform: uppercase;
     color: var(--dim);
   }
-  .ig-grid {
-    display: flex;
-    gap: 16px;
+  .shots {
+    display: grid;
+    gap: 14px;
     margin-top: 18px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 10px;
   }
-  .ig-grid :global(.instagram-media),
-  .ig-grid :global(iframe) {
-    flex: 0 0 330px;
-    min-width: 326px !important;
-    max-width: 330px !important;
-    margin: 0 !important;
-    scroll-snap-align: start;
+  @media (min-width: 700px) {
+    .shots {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
-  .ig-grid blockquote {
-    padding: 18px;
-    border-radius: 14px;
+  .shot {
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    padding: 14px 16px 16px;
+    border-radius: 18px;
     background: #fff;
     border: 1px solid var(--line);
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+  .shot:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(60, 45, 20, 0.1);
+  }
+  .shot-art {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    color: #fff;
+    background:
+      radial-gradient(120% 90% at 20% 15%, rgba(255, 255, 255, 0.55), transparent 55%),
+      linear-gradient(135deg, color-mix(in srgb, var(--c) 45%, #fff), var(--c));
+  }
+  .shot-title {
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 1.15;
+  }
+  .shot-cap {
     font-size: 14px;
+    color: var(--muted);
+  }
+  .shot-go {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--pink-ink);
   }
   .ig-card {
     display: flex;
     align-items: center;
     gap: 18px;
-    margin-top: 16px;
+    margin-top: 14px;
     padding: 14px 18px 14px 14px;
     border-radius: 18px;
     background: #fff;
