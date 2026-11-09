@@ -15,10 +15,10 @@ const { variant = 'mark', size = 28, class: className = '' } = Astro.props;
 {
   variant === 'mark' ? (
     <svg class={className} width={size} height={size} viewBox="0 0 26 26" aria-hidden="true">
-      <rect x="2" y="2" width="4" height="22" style="fill: var(--ink, #e9e4d8)" />
-      <rect x="6" y="2" width="15" height="5" style="fill: var(--gold-fill, #c9a96e)" />
-      <rect x="6" y="10.5" width="9" height="5" style="fill: var(--blue-fill, #4a6cf7)" />
-      <rect x="6" y="19" width="18" height="5" style="fill: var(--pink-fill, #f8bfd6)" />
+      <rect x="2" y="2" width="5" height="22" style="fill: var(--ink, #e9e4d8)" />
+      <rect x="7" y="2" width="14" height="5" style="fill: var(--gold-fill, #c9a96e)" />
+      <rect x="7" y="10.5" width="8" height="5" style="fill: var(--blue-fill, #4a6cf7)" />
+      <rect x="7" y="19" width="17" height="5" style="fill: var(--pink-fill, #f8bfd6)" />
     </svg>
   ) : (
     <figure class:list={['bare-fig', className]}>
@@ -38,17 +38,17 @@ const { variant = 'mark', size = 28, class: className = '' } = Astro.props;
           <text x="268" y="294">50</text>
           <text x="368" y="294">75</text>
         </g>
-        <rect x="74" y="24" width="30" height="252" style="fill: var(--ink, #e9e4d8)" />
+        <rect x="74" y="24" width="62" height="248" style="fill: var(--ink, #e9e4d8)" />
         <a href="#work" class="bare-link" aria-label="Data: jump to my projects">
-          <rect class="bare-bar" style="--d:0ms; fill: var(--gold-fill, #c9a96e)" x="104" y="24" width="250" height="62" />
-          <text class="bare-go" x="340" y="60" text-anchor="end">projects →</text>
+          <rect class="bare-bar" style="--d:0ms; fill: var(--gold-fill, #c9a96e)" x="136" y="24" width="223" height="62" />
+          <text class="bare-go" x="347" y="60" text-anchor="end">projects →</text>
         </a>
         <a href="#economics" class="bare-link" aria-label="Economics: jump to my markets and money work">
-          <rect class="bare-bar" style="--d:120ms; fill: var(--blue-fill, #4a6cf7)" x="104" y="117" width="160" height="62" />
-          <text class="bare-go on-blue" x="250" y="153" text-anchor="end">markets →</text>
+          <rect class="bare-bar" style="--d:120ms; fill: var(--blue-fill, #4a6cf7)" x="136" y="117" width="143" height="62" />
+          <text class="bare-go on-blue" x="267" y="153" text-anchor="end">markets →</text>
         </a>
         <a href="#leadership" class="bare-link" aria-label="People: jump to my leadership">
-          <rect class="bare-bar" style="--d:240ms; fill: var(--pink-fill, #f8bfd6)" x="104" y="210" width="300" height="62" />
+          <rect class="bare-bar" style="--d:240ms; fill: var(--pink-fill, #f8bfd6)" x="136" y="210" width="268" height="62" />
           <text class="bare-go" x="390" y="246" text-anchor="end">leadership →</text>
         </a>
       </svg>
